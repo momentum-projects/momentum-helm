@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
+
+.container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 55% 5% 40%;
+    grid-template-areas: 
+    "title . image"
+    "interests . image"
+    "posts . ."
+  }
+  .header {
+    grid-area: title;
+  }
+  .interests {
+    grid-area: interests;
+  }
+  .image {
+    grid-area: image;
+    width: 100%;
+  }
