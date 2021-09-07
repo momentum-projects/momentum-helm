@@ -1,3 +1,5 @@
+
+
 var user1 = {
   userName: '@chrisathanas',
   displayName: 'Chris Athanas',
@@ -236,7 +238,7 @@ function renderTweetHeader(displayName, userName, timestamp) {
   return `
     <p class="tweet-displayName">
       <span class="tweet-displayName-displayName-span">${displayName}</span>
-      <img src="assets/blue-check.jpg" width=20>
+      <img src="assets/blue-check.jpg" width="25px">
       <span class="tweet-displayName-userName-span">${userName}
       •
       ${calcTimeAgo(timestamp)}
