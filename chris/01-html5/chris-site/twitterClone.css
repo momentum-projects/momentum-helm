@@ -85,6 +85,10 @@ p {
 .userInfo-left .joinedDateContainer {
   margin-top: 12px;
 }
+.userInfo-left .interests {
+  margin-top: 10px;
+  line-height: 20px;
+}
 .userInfo-left .followersContainer {
   margin-top: 10px;
   color: grey;
