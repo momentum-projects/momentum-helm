@@ -1,0 +1,31 @@
+@import url("rainbow-animation.css");
+
+.title-text {
+  font-size: 3rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display";
+  font-weight: 900;
+  font-style: italic;
+  margin-block-end: 15px;
+  -webkit-animation: rainbow 8s infinite;
+  -ms-animation: rainbow 8s infinite;
+  animation: rainbow 8s infinite;
+}
+
+p,
+ul,
+li,
+ol {
+  font-family: "Open Sans";
+}
+
+h2 {
+  font-size: 1.5rem;
+}
