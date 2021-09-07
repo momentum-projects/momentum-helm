@@ -24,12 +24,18 @@
     grid-area: image;
     width: 100%;
   }
+
+  .post-list-container {
+    grid-area: posts;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
   
   .post-container {
     margin-top: 5%;
     padding: 2.5%;
     border: 1px solid ghostwhite;
-    grid-area: posts;
     width: 100%;
     display: grid;
     align-content: start;
