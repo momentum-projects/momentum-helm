@@ -1,21 +1,40 @@
-@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
+@import url("https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,600,600i,700,700i,800,800i|Open+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i&display=swap");
+
+.content-container {
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 60%;
+}
 
 .container {
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 55% 5% 40%;
-    grid-template-areas: 
-    "title . image"
-    "interests . image"
-    "posts . ."
-  }
-  .header {
-    grid-area: title;
-  }
-  .interests {
-    grid-area: interests;
-  }
-  .image {
-    grid-area: image;
-    width: 100%;
-  }
+  display: grid;
+  align-content: start;
+  grid-template-rows: auto;
+  grid-template-columns: 55% 5% 40%;
+  grid-template-areas: "interests . image";
+}
+
+.title {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  font-size: 2rem;
+}
+
+.interests {
+  grid-area: interests;
+}
+
+.image {
+  grid-area: image;
+  width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin-block-end: 15px;
+}
+
+ul {
+    margin: 0px;
+    padding-left: 20px;
+}
