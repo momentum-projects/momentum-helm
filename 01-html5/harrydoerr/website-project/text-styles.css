@@ -1,6 +1,6 @@
 @import url("rainbow-animation.css");
 
-.title-text {
+.title-text-style {
   font-size: 3rem;
 }
 
@@ -28,4 +28,9 @@ ol {
 
 h2 {
   font-size: 1.5rem;
+}
+
+.post-title-text-style {
+    margin-block-end: 0%;
+    margin-block-start: 0%;
 }

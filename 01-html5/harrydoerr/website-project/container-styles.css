@@ -1,0 +1,50 @@
+.main-container {
+    display: grid;
+    align-content: start;
+    grid-template-rows: auto;
+    grid-template-columns: 55% 5% 40%;
+    grid-template-areas:
+      "interests . image"
+      "posts posts posts";
+  }
+  
+  .title-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    margin-top: 5%;
+    background-color: white;
+  }
+  
+  .interests-container {
+    grid-area: interests;
+  }
+  
+  .image-container {
+    grid-area: image;
+    width: 100%;
+  }
+  
+  .post-container {
+    margin-top: 5%;
+    padding: 2.5%;
+    border: 1px solid ghostwhite;
+    grid-area: posts;
+    width: 100%;
+    display: grid;
+    align-content: start;
+    grid-template-rows: auto;
+    grid-template-columns: 20% 5% 75%;
+    grid-template-areas: "image . text";
+  }
+  
+  .post-item-container {
+    grid-area: text;
+  }
+  
+  .post-image-container {
+    overflow: hidden;
+    max-height: 160px;
+    max-width: 160px;
+    grid-area: image;
+  }
