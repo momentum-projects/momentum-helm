@@ -5,6 +5,31 @@
         <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My New Website</title>
+        <style>
+            nav a {
+                font-size: large;
+            }
+            nav > a.active {
+                font-size: small;
+            }
+            .little {
+                font-size: small;
+                color: red;
+            }
+            .green {
+                color: green;
+            }
+            #span33 {
+                font-size: small;
+                color: blue;
+            }
+            article {
+                border: 1px red solid;
+            }
+            section {
+                border: 1px blue solid;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -18,13 +43,15 @@
                     Bing
                 </a>
                 <a href="https://www.google.com">Google</a>
-                <a href="base.html">Base Page</a>
+                <a class="active" href="base.html">Base Page</a>
+                <span><a class="active" href="base.html">Base Page</a></span>
                 <a href="second.html">Second Page</a>
                 <a href="/absolute.html">Second Page</a>
                 <a href="//www.google.com/absolute.html">Second Page</a>
             </nav>
         </header>
         <main>
+            <a href="https://www.google.com">Google</a>
             <p>My first paragraph.</p>
 
             <section>
@@ -32,12 +59,12 @@
                 <p>My second paragraph.</p>
             </section>
             <div class="comment">
+                <span class="little">One</span><span>Two</span>
                 <span>One</span><span>Two</span>
                 <span>One</span><span>Two</span>
+                <span class="little">One</span><span>Two</span>
                 <span>One</span><span>Two</span>
-                <span>One</span><span>Two</span>
-                <span>One</span><span>Two</span>
-                <span>One</span><span>Two</span>
+                <span>One</span><span id="span33">Two</span>
                 <span>One</span><span>Two</span>
             </div>
             <div class="comment">
@@ -67,7 +94,7 @@
                 <li>Bank</li>
                 <li>Post Office</li>
             </ol>
-            <article>
+            <article class="little green">
                 <p><b>This</b> is <em>about</em> topic one.</p>
                 <p><strong>This</strong> is <i>about</i> topic two.</p>
                 <p>This is about topic three.</p>
