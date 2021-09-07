@@ -1,5 +1,6 @@
 html, body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-family: "Gloria Hallelujah", cursive;
 }
 
 p {
@@ -7,9 +8,11 @@ p {
 }
 
 #container {
-  margin: 0 10px;
+  margin: 0 auto;
   border: 1px solid #f1f1f1;
   border-top-style: none;
+  max-width: 600px;
+  
 }
 
 /* Header */
@@ -104,6 +107,7 @@ p {
   font-weight: bold;
   border-style: none;
   cursor: pointer;
+  font-family: "Gloria Hallelujah", cursive;
 }
 button:hover {
   opacity: .8;

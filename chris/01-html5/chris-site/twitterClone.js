@@ -189,10 +189,10 @@ function renderTweet(user, tweet) {
     </div>
 
     <div class="tweetContainer-bottom">
-        <p><img src="assets/speech.png" width="20px"> ${numFormatter(5200)}</p>
-        <p><img src="assets/retweet.png" width="20px"> ${numFormatter(7723)}</p>
-        <p><img src="assets/white-heart.png" width="20px"> ${numFormatter(65212)}</p>
-        <p><img src="assets/share.png" width="20px"></p>
+        <p><img src="assets/speech.png" width="25px"> ${numFormatter(5200)}</p>
+        <p><img src="assets/retweet.png" width="25px"> ${numFormatter(7723)}</p>
+        <p><img src="assets/white-heart.png" width="25px"> ${numFormatter(65212)}</p>
+        <p><img src="assets/share.png" width="25px"></p>
     </div>
 
   </div>
