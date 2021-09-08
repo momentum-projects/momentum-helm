@@ -5,33 +5,6 @@ import Profile, { profiles } from './profile.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-// export class AppComponent implements OnInit {
-//   title = 'resume-chris';
-//   profiles: Profile[] = profiles;
-
-//   ngOnInit() {
-//     setTimeout(() => {
-//       this.firstProfileSet = 'Jin';
-//       this.profiles[1].firstName = 'Thomans';
-//     }, 1000);
-//   }
-
-//   firstProfile() {
-//     return this.profiles[0];
-//   }
-
-//   get firstProfileGet() {
-//     return this.firstProfile();
-//   }
-//   set firstProfileSet(value: string) {
-//     this.firstProfile().firstName = value;
-//   }
-
-//   onClick() {
-//     this.firstProfileSet = 'Jimbo';
-//   }
-// }
-
 export class AppComponent implements OnInit {
   whoTurn;
   gameWon;
@@ -69,7 +42,7 @@ export class AppComponent implements OnInit {
     if (this.board[x][y] != '🟩') {
       this.badMove = true;
       return;
-    };
+    }
     this.badMove = false;
     this.board[x][y] = player;
     this.whoTurn = this.setPlayerTurn(this.whoTurn);
@@ -169,7 +142,7 @@ export class AppComponent implements OnInit {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         if (this.board[y][x] != '🟩') {
-          slotsFull++
+          slotsFull++;
         }
       }
     }
