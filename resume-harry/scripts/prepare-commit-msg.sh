@@ -2,11 +2,15 @@
 
 # Checks the standard output to see if the user is using a GUI or the command line
 if [ -t 1 ]; then
-  # Allows user keyboard input.
+  # Allows user keyboard input and sets the standard input as the command line if that is the case.
   exec < /dev/tty
+  red=$"\e[0;91m"
+  green=$"\e[0;32m"
   bold=$"\e[1m"
   reset=$"\e[0m"
 else
+  red=$""
+  green=$""
   bold=$""
   reset=$""
 fi
