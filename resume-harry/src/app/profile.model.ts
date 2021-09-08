@@ -1,23 +1,4 @@
 class Profile {
-  firstName: string;
-  lastName: string;
-  title: string;
-  experience: string[];
-
-  constructor(
-    firstName: string,
-    lastName: string,
-    title: string,
-    experience: string[]
-  ) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.title = title;
-    this.experience = experience;
-  }
-}
-
-class Profile2 {
   constructor(
     public firstName: string,
     public lastName: string,
@@ -25,3 +6,13 @@ class Profile2 {
     public experience: string[]
   ) {}
 }
+
+const profiles = [
+  new Profile("Harry", "Stephens", "Mr.", ["Product Designer 2018-2020", "Developer 2020-2021"]),
+  new Profile('David', 'Rasch', 'Mr.', [
+    'Developer 2020',
+    'Angular Instructor 2021',
+  ]),
+  new Profile('Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
+  new Profile('Dee', 'Meyers', 'Ms.', ['Student 2020', 'Developer 2021']),
+]
