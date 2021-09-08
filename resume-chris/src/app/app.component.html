@@ -3,7 +3,7 @@
 <router-outlet></router-outlet>
 
 <ul>
-  <li *ngfor="let profile; in: profiles">
+  <li *ngFor="let profile of profiles">
     {{ profile.firstName }}
   </li>
   <li>{{ profiles[0].firstName }}</li>
