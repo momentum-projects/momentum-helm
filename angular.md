@@ -10,11 +10,14 @@
 ## starting a project
 
 ```bash
-nvm install --lts
-nvm use --lts
 npm install -g @angular/cli@v11-lts
 
-ng new -S resume-david
+ng new -S linkme-[yourname]
+# Yes - type-checking
+# Yes - add routing
+# Use SCSS for our CSS language
+
+cd linkme-[yourname]
 npm i -D @angular-eslint/template-parser@4
 ng add @angular-eslint/schematics
 ng g @angular-eslint/schematics:convert-tslint-to-eslint --remove-tslint-if-no-more-tslint-targets --ignore-existing-tslint-config
@@ -50,20 +53,24 @@ npm install --save-dev prettier prettier-eslint eslint-config-prettier
 1. *ngFor
 1. *ngFor - trackBy
 1. ng-container
-1. *ngModel - needs imported
+1. *ngModel - needs imported via `import { FormsModule } from "@angular/forms";` and added to `imports` in `app.module.ts`
 
-## Activity
-
+## Activity 
 Build a tic-tac-toe game with Angular
 
 Include:
 
-- a start game button
+- a start game button that clears the board
+- allow plays in empty squares with alternating "X"s and "O"s
 - a grid with 3x3 and borders using CSS
+
+Bonus:
+- detect a win
+- beautiful styles
+- utilize `for` loop(s) to create the board
 
 ## Angular Lesson 2 - Adding Ant Design
 
-1. ElementRef
 1. ngStyle
 1. ngClass
 1. install
@@ -76,6 +83,11 @@ Include:
 ## resources
 
 - [Angular Directives](https://angular.io/guide/built-in-directives)
-- [Angular ESLint](https://github.com/angular-eslint/angular-eslint)
+- [Angular ESLint](https://github.com/angular-eslint/angular-eslint) and [Angular ESLint with Angular 11](https://github.com/angular-eslint/angular-eslint#quick-start-with-angular-before-v12)
 - [Linting Thoughts](https://dev.to/dreiv/using-eslint-and-prettier-with-vscode-in-an-angular-project-42ib)
 - [Ant CSS Component Library](https://ng.ant.design/docs/introduce/en))
+
+## useful commands
+
+* run the server `ng serve`
+* run the linter `ng lint` and to fix problems `ng lint --fix`
