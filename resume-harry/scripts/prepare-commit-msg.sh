@@ -25,15 +25,15 @@ if [ -t 1 ]; then
 
 
   # Prompts the user for their commit message.
-  echo -e "${bold}Please describe the changes you made below:${reset}"
-  read -r -p "Your Commit Message: " MESSAGE
+  # echo -e "${bold}Please describe the changes you made below:${reset}"
+  # read -r -p "Your Commit Message: " MESSAGE
 
   # Checks to make sure that "git commit" was not run using any of these options: message, template, merge, or squash
   if [[ -z "$COMMIT_SOURCE" ]]
   then
 
   # Saves the standard commit message hint to be added back later.
-  # hint=$(cat ".git/COMMIT_EDITMSG")
+  MESSAGE=$(cat ".git/COMMIT_EDITMSG")
 
   # Places the pieces of the regex string into the commit messages.
   echo "$CHANGETYPE(DAY$DAY): $MESSAGE" > ".git/COMMIT_EDITMSG"
