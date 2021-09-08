@@ -2,6 +2,9 @@
 // npm init
 // npm install readline
 // npm install --save-dev @types/node
+// nvm use 14.17.6   
+// or
+// nvm alias default 14.17.6     
 
 import * as readline from "readline";
 
@@ -35,7 +38,7 @@ async function runAdd() {
   try {
     const val1 = await ask("first number:")
     const val2 = await ask("first number:")
-    console.log("The sum is" + (parseInt(val1) + parseInt(val2)))
+    console.log("The sum is=" + (parseInt(val1) + parseInt(val2)))
   } catch(err) {
     console.log("question rejected")
   } finally {
@@ -47,5 +50,4 @@ runAdd()
 .then(() => {
     console.log("it's done");
 });
-  
-
+ 
