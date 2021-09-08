@@ -4,3 +4,5 @@ node_modules
 .envrc
 .nvmrc
 
+# Ignoring eslint cache file
+resume-harry/.eslintcache
