@@ -48,6 +48,6 @@ async function runAdd() {
 
 runAdd()
 .then(() => {
-    console.log("it's done");
-});
- 
+    console.log("it's done!");
+}); 
+
