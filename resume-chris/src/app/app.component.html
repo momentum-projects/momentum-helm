@@ -3,8 +3,11 @@
 <router-outlet></router-outlet>
 
 <ul>
-  <!-- {{ ngfor(profile in profiles) }} -->
-  <li>{{ profiles[1].firstName }}</li>
-  <li>{{ profiles[2].firstName }}</li>
-
+  <li *ngfor="let profile; in: profiles">
+    {{ profile.firstName }}
+  </li>
+  <li>{{ profiles[0].firstName }}</li>
+  <li>{{ profiles[1].firstName.toUpperCase() }}</li>
+  <input [value]="firstProfileGet.firstName" />
+  <button (click)="onClick()">Change first name</button>
 </ul>
