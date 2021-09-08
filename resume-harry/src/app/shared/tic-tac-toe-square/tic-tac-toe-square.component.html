@@ -1,1 +1,9 @@
-<p>tic-tac-toe-square works!</p>
+<h2
+  class="tic-tac-toe-square"
+  [style.gridArea]="gameData.id"
+  [style.cursor]="!squareClickable ? 'not-allowed' : 'pointer'"
+  [id]="gameData.id"
+  (click)="squareClickable ? gameSquareClickUpdate(gameData) : null"
+>
+  {{ squareText }}
+</h2>

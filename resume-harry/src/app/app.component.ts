@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import Profile, { profiles } from './profile.model';
+import Profile, { profiles } from './models/profile.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
