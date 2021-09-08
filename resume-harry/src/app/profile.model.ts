@@ -1,4 +1,4 @@
-class Profile {
+export default class Profile {
   constructor(
     public firstName: string,
     public lastName: string,
@@ -7,12 +7,15 @@ class Profile {
   ) {}
 }
 
-const profiles = [
-  new Profile("Harry", "Stephens", "Mr.", ["Product Designer 2018-2020", "Developer 2020-2021"]),
+export const profiles = [
+  new Profile('Harry', 'Stephens', 'Mr.', [
+    'Product Designer 2020',
+    'Developer 2021',
+  ]),
   new Profile('David', 'Rasch', 'Mr.', [
     'Developer 2020',
     'Angular Instructor 2021',
   ]),
   new Profile('Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
   new Profile('Dee', 'Meyers', 'Ms.', ['Student 2020', 'Developer 2021']),
-]
+];
