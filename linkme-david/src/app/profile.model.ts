@@ -1,4 +1,4 @@
-class Profile {
+export default class Profile {
   constructor(
     public firstName: string,
     public lastName: string,
@@ -7,7 +7,7 @@ class Profile {
   ) {}
 }
 
-const profiles = [
+export const profiles = [
   new Profile('David', 'Rasch', 'Mr.', [
     'Developer 2020',
     'Angular Instructor 2021',
