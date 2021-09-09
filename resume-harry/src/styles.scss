@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+h1.ant-typography, .ant-typography h1,
+.ant-typography + h1.ant-typography,
+h2.ant-typography, .ant-typography h2,
+.ant-typography + h2.ant-typography,
+h3.ant-typography, .ant-typography h3,
+.ant-typography + h3.ant-typography,
+h4.ant-typography, .ant-typography h4,
+.ant-typography + h4.ant-typography,
+h5.ant-typography, .ant-typography h5,
+.ant-typography + h5.ant-typography,
+h6.ant-typography, .ant-typography h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}

@@ -10,11 +10,22 @@
   </nz-header>
   <nz-content>
     <div class="inner-content">
-      <app-profile
-        [profile]="profiles[0]"
-        name="Profile Editing Page"
-      ></app-profile>
+      <div *ngIf="!currentUserId; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock>
+        <app-log-in
+          [(ngModel)]="currentUserId"
+          [profiles]="profiles"
+          (activeUserEvent)="setActiveUser($event)"
+        ></app-log-in>
+      </ng-template>
+      <ng-template #elseBlock>
+        <h1 nz-typography>Profile Editing Page</h1>
+        <div *ngFor="let i of profiles">
+          <app-profile [profile]="i"></app-profile>
+        </div>
+      </ng-template>
     </div>
   </nz-content>
+
   <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
 </nz-layout>

@@ -1,11 +1,32 @@
-<h1 nz-typography>{{ name }}</h1>
-<section>
-  <h5 nz-typography nzType="secondary">First Name</h5>
-  <h3 nz-typography>{{ profile.firstName }}</h3>
-  <h5 nz-typography nzType="secondary">Last Name</h5>
-  <h3 nz-typography>{{ profile.lastName }}</h3>
-  <app-experience
-    [experience]="profile.experience"
-    (newExperienceEvent)="onAddExperience($event)"
-  ></app-experience>
-</section>
+<nz-card class="individual-profile-container" style="width: 50vw">
+  <div nz-row nzJustify="start">
+    <div nz-col nzSpan="8" class="gutter-row">
+      <h6 nz-typography nzType="secondary">First Name</h6>
+    </div>
+    <div nz-col nzSpan="8" class="gutter-row">
+      <h6 nz-typography nzType="secondary">Last Name</h6>
+    </div>
+  </div>
+  <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+    <div nz-col nzSpan="8" class="gutter-row">
+      <h4 nz-typography>{{ profile.firstName }}</h4>
+    </div>
+    <div nz-col nzSpan="8" class="gutter-row">
+      <h4 nz-typography>{{ profile.lastName }}</h4>
+    </div>
+  </div>
+  <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
+    <div nz-col nzFlex="auto">
+      <app-experience
+        [experience]="profile.experience"
+        (newExperienceEvent)="onAddExperience($event)"
+      ></app-experience>
+    </div>
+    <div nz-col>
+      <app-connect-button
+        [userId]="profile.userId"
+        (userIdConnectEvent)="createNewConnection($event)"
+      ></app-connect-button>
+    </div>
+  </div>
+</nz-card>

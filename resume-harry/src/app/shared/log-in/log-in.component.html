@@ -1,0 +1,26 @@
+<section>
+  <h5 nz-typography>Your User ID</h5>
+  <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+    <div nz-col nzSpan="8" class="gutter-row">
+      <nz-input-number
+        [(ngModel)]="currentUserId"
+        [nzMin]="0"
+        [nzMax]="profiles.length - 1"
+        style="width: 100%"
+      ></nz-input-number>
+    </div>
+  </div>
+  <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+    <div nz-col nzSpan="8" class="gutter-row">
+      <button
+        nz-button
+        [disabled]="!currentUserId"
+        nzType="primary"
+        (click)="activeUserEvent.emit(currentUserId)"
+        nzBlock
+      >
+        Log In
+      </button>
+    </div>
+  </div>
+</section>

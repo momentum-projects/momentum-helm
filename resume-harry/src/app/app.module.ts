@@ -20,11 +20,22 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ConnectButtonComponent } from './shared/connect-button/connect-button.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { LogInComponent } from './shared/log-in/log-in.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, ProfileComponent, ExperienceComponent],
+  declarations: [
+    AppComponent,
+    ProfileComponent,
+    ExperienceComponent,
+    ConnectButtonComponent,
+    LogInComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,6 +49,9 @@ registerLocaleData(en);
     NzMenuModule,
     NzInputModule,
     NzButtonModule,
+    NzGridModule,
+    NzCardModule,
+    NzInputNumberModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
