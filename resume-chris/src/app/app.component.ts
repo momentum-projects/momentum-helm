@@ -7,21 +7,5 @@ import Profile, { profiles } from './profile.model';
 })
 export class AppComponent {
   profiles: Profile[] = profiles;
-  firstProfile() {
-    return this.profiles[0];
-  }
-
-  get firstProfileGet() {
-    return this.firstProfile();
-  }
-  set firstProfileSet(value: string) {
-    this.firstProfile().firstName = value;
-  }
-  onClick() {
-    this.firstProfileSet = 'Atul';
-  }
-
-  onConsoleLog(x) {
-    console.log(x);
-  }
+  title = 'linkme-chris';
 }

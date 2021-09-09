@@ -1,0 +1,19 @@
+<div>
+  <h2>Experience</h2>
+  <div>
+    <input
+      nz-input
+      placeholder="your experience"
+      [(ngModel)]="newExperience"
+      type="text"
+    />
+    <button nz-button nzType="primary" (click)="onNewExperience()">
+      Add New Experience
+    </button>
+  </div>
+  <ul>
+    <li *ngFor="let experienceLine of experience">
+      {{ experienceLine }}
+    </li>
+  </ul>
+</div>

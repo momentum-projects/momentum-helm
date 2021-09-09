@@ -1,31 +1,28 @@
-<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
-
 <router-outlet></router-outlet>
 
-<div>
-  <p>{{ firstProfile().firstName }}</p>
-  <p>{{ firstProfileGet.firstName }}</p>
-  <p>{{ profiles[1].firstName.toUpperCase() }}</p>
-  <p>{{ profiles[2].firstName }}</p>
-  <input [(ngModel)]="profiles[0].firstName" />
-  <div [innerText]="firstProfileGet.firstName"></div>
-  <button (click)="onClick()">change first name</button>
-  <button [ngStyle]="{ color: 'red' }" (click)="onClick()">
-    change first name
-  </button>
-  <button
-    [ngClass]="{ danger: profiles[0].firstName == 'David' }"
-    (click)="onClick()"
-  >
-    change first name
-  </button>
-</div>
+<!-- <app-profile [profile]="profiles[0]" name="Profile Editing Page"></app-profile> -->
 
-
-<!-- <input [value]="firstProfileGet.firstName" />
-<button (click)="onClick()">Change first name</button> -->
-<!-- (click)="onConsoleLog([i, j])"> -->
-
-<app-tictactoe1></app-tictactoe1>
-
-<app-tictactoe2></app-tictactoe2>
+<nz-layout>
+  <nz-header>
+    <div class="logo">Edit Profile</div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item>nav 1</li>
+      <li nz-menu-item>nav 2</li>
+      <li nz-menu-item>nav 3</li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <!-- <nz-breadcrumb>
+      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+      <nz-breadcrumb-item>List</nz-breadcrumb-item>
+      <nz-breadcrumb-item>App</nz-breadcrumb-item>
+    </nz-breadcrumb> -->
+    <div class="inner-content">
+      <app-profile
+        [profile]="profiles[0]"
+        name="Profile Editing Page"
+      ></app-profile>
+    </div>
+  </nz-content>
+  <nz-footer>Designed by Helm and Momentum Crew</nz-footer>
+</nz-layout>

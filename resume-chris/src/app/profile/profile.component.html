@@ -1,0 +1,11 @@
+<div>
+  <p>First Name: {{ profile.firstName }}</p>
+  <p>Last Name: {{ profile.lastName }}</p>
+</div>
+<div>
+  <app-experience 
+    [experience]="profile.experience"
+    (newExperienceEvent)="onNewExperience($event)"        
+  >
+  </app-experience>
+</div>
