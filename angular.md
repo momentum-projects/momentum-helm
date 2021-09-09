@@ -79,7 +79,7 @@ Bonus:
 1. ngStyle
 1. ngClass
 1. install
-    - `ng add ng-zorro-antd`
+    - `ng add ng-zorro-antd` **dynamic loading YES; custom theme NO; language en_US**
     - restore `app.component.html`
     - remove `sipmle.css`
 1. [Ant Design](https://ng.ant.design)
@@ -96,6 +96,7 @@ Bonus:
 
 - run the server `ng serve`
 - run the linter `ng lint` and to fix problems `ng lint --fix`
+- create a component `ng generate component <name-of-component>` or `ng g c <name-of-component>`
 
 ## adding git the remote
 
