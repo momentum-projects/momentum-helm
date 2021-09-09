@@ -24,8 +24,11 @@
     </div>
     <div nz-col>
       <app-connect-button
+        [currentUserId]="currentUserId"
+        [profile]="profile"
         [userId]="profile.userId"
-        (userIdConnectEvent)="createNewConnection($event)"
+        ngDefaultControl
+        (newConnectionEvent)="alterConnection($event)"
       ></app-connect-button>
     </div>
   </div>

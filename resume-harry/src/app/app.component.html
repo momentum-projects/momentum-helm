@@ -13,15 +13,23 @@
       <div *ngIf="!currentUserId; then thenBlock; else elseBlock"></div>
       <ng-template #thenBlock>
         <app-log-in
-          [(ngModel)]="currentUserId"
+          [ngModel]="currentUserId"
           [profiles]="profiles"
           (activeUserEvent)="setActiveUser($event)"
+          ngDefaultControl
         ></app-log-in>
       </ng-template>
       <ng-template #elseBlock>
         <h1 nz-typography>Profile Editing Page</h1>
-        <div *ngFor="let i of profiles">
-          <app-profile [profile]="i"></app-profile>
+        <div *ngFor="let profile of profiles">
+          <div *ngIf="profile.userId !== currentUserId; then thenBlock"></div>
+          <ng-template #thenBlock>
+            <app-profile
+              [profile]="profile"
+              [currentUserId]="currentUserId"
+              (newConnectionEvent)="alterConnection($event)"
+            ></app-profile>
+          </ng-template>
         </div>
       </ng-template>
     </div>

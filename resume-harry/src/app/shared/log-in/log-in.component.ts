@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Profile } from '../../models/profile.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Profile } from '../services/profile.service';
 
 @Component({
   selector: 'app-log-in',
@@ -8,6 +8,6 @@ import { Profile } from '../../models/profile.model';
 })
 export class LogInComponent {
   @Input() profiles!: Profile[];
-  currentUserId!: number;
   @Output() activeUserEvent = new EventEmitter<number>();
+  currentUserId!: number;
 }

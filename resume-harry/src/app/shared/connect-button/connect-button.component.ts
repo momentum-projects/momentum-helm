@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Profile } from '../services/profile.service';
 
 @Component({
   selector: 'app-connect-button',
@@ -7,10 +8,17 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 })
 export class ConnectButtonComponent {
   @Input() userId!: number;
-  @Output() userIdConnectEvent = new EventEmitter<number>();
-  buttonTextString = 'Connect';
+  @Input() profile!: Profile;
+  @Input() currentUserId!: number;
+  @Output() newConnectionEvent = new EventEmitter<number>();
 
-  createNewConnection() {
-    this.userIdConnectEvent.emit(this.userId);
+  alterConnection(userId: number) {
+    this.newConnectionEvent.emit(userId);
+  }
+
+  get buttonTextString() {
+    return this.profile.connections.includes(this.currentUserId)
+      ? 'Disconnect'
+      : 'Connect';
   }
 }

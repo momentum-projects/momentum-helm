@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Profile } from '../../models/profile.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Profile } from '../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,16 +7,16 @@ import { Profile } from '../../models/profile.model';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  @Input() profile!: Profile;
   @Input() name!: string;
-  @Input() activeUser!: number;
+  @Input() currentUserId!: number;
+  @Input() profile!: Profile;
+  @Output() newConnectionEvent = new EventEmitter<number>();
 
   onAddExperience(experience: string) {
     this.profile.experience.push(experience);
   }
 
-  createNewConnection(userId: number) {
-    console.log(userId);
-    this.profile.connections.push(userId);
+  alterConnection(userId: number) {
+    this.newConnectionEvent.emit(userId);
   }
 }

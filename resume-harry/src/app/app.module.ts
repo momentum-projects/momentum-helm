@@ -25,6 +25,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { LogInComponent } from './shared/log-in/log-in.component';
+import { ProfileService } from './shared/services/profile.service';
 
 registerLocaleData(en);
 
@@ -53,7 +54,7 @@ registerLocaleData(en);
     NzCardModule,
     NzInputNumberModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ProfileService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
