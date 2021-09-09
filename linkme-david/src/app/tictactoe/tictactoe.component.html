@@ -1,0 +1,30 @@
+<ul>
+  <li>
+    <span
+      *ngFor="let pos of [0, 1, 2]; last as isLast"
+      (click)="clickSquare(pos)"
+    >
+      {{ getSquare(pos) }} <span *ngIf="!isLast"> | </span>
+    </span>
+  </li>
+  <li>
+    <span
+      *ngFor="let pos of [3, 4, 5]; last as isLast"
+      (click)="clickSquare(pos)"
+    >
+      {{ getSquare(pos) }} <span *ngIf="!isLast"> | </span>
+    </span>
+  </li>
+  <li>
+    <span
+      *ngFor="let pos of [6, 7, 8]; last as isLast"
+      (click)="clickSquare(pos)"
+    >
+      {{ getSquare(pos) }} <span *ngIf="!isLast"> | </span>
+    </span>
+  </li>
+</ul>
+<div *ngIf="winner > 0; else elseBlock">You Win! {{ this.winner }}</div>
+<ng-template #elseBlock
+  >We are still playing, it's {{ this.turn }}'s turn</ng-template
+>
