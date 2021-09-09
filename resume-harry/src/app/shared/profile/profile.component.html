@@ -1,16 +1,8 @@
-<span nz-typography nzType="secondary">{{ name }}</span>
+<h1 nz-typography>{{ name }}</h1>
 <section>
-  <h1 nz-typography>First Name: {{ profiles.firstName }}</h1>
-  <h1 nz-typography>Last Name: {{ profiles.lastName }}</h1>
-
-  <section>
-    <span nz-typography>
-      <h4 nz-typography>Experience</h4>
-      <ul>
-        <li *ngFor="let experienceLine of profiles.experience">
-          {{ experienceLine }}
-        </li>
-      </ul>
-    </span>
-  </section>
+  <h5 nz-typography nzType="secondary">First Name</h5>
+  <h3 nz-typography>{{ profiles.firstName }}</h3>
+  <h5 nz-typography nzType="secondary">Last Name</h5>
+  <h3 nz-typography>{{ profiles.lastName }}</h3>
+  <app-experience [experience]="profiles.experience"></app-experience>
 </section>

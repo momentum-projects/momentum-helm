@@ -1,0 +1,19 @@
+<span nz-typography>
+  <h5 nz-typography nzType="secondary">Experience</h5>
+  <h5 nz-typography *ngFor="let experienceLine of experience">
+    <i nz-icon nzType="minus" style="font-size: 16px"></i>
+    {{ experienceLine }}
+  </h5>
+  <br />
+  <section>
+    <input
+      type="text"
+      nz-input
+      placeholder="Add New Experience"
+      [(ngModel)]="newExperience"
+    />
+    <button nz-button nzType="primary" (click)="onAddExperience()">
+      Add New Experience
+    </button>
+  </section>
+</span>
