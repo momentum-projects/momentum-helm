@@ -11,11 +11,12 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileComponent } from './profile/profile.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, TictactoeComponent],
+  declarations: [AppComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
