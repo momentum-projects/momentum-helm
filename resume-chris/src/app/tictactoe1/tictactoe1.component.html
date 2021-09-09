@@ -1,0 +1,16 @@
+<p *ngIf="gameWon != ''">{{ gameWon }} WON!</p>
+<p *ngIf="gameWon == ''">{{ whoTurn }} 's turn</p>
+<p *ngIf="badMove">Illegal move, try again.</p>
+
+<ul>
+  <p *ngFor="let y of board; index as i">
+    <span
+      *ngFor="let x of y; index as j"
+      (click)="onSetLocation(whoTurn, i, j)"
+      style="cursor: pointer"
+    >
+      {{ x }}
+    </span>
+  </p>
+  <button (click)="onStartOver()">Start over</button>
+</ul>
