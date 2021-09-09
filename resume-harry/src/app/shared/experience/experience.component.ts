@@ -13,5 +13,6 @@ export class ExperienceComponent {
 
   onAddExperience() {
     this.newExperienceEvent.emit(this.newExperience);
+    this.newExperience = '';
   }
 }

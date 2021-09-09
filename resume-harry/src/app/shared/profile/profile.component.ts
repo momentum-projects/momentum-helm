@@ -7,8 +7,10 @@ import { Profile } from '../../models/profile.model';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  @Input() profiles!: Profile;
+  @Input() profile!: Profile;
   @Input() name!: string;
 
-  constructor() {}
+  onAddExperience(experience: string) {
+    this.profile.experience.push(experience);
+  }
 }

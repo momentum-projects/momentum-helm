@@ -1,8 +1,11 @@
 <h1 nz-typography>{{ name }}</h1>
 <section>
   <h5 nz-typography nzType="secondary">First Name</h5>
-  <h3 nz-typography>{{ profiles.firstName }}</h3>
+  <h3 nz-typography>{{ profile.firstName }}</h3>
   <h5 nz-typography nzType="secondary">Last Name</h5>
-  <h3 nz-typography>{{ profiles.lastName }}</h3>
-  <app-experience [experience]="profiles.experience"></app-experience>
+  <h3 nz-typography>{{ profile.lastName }}</h3>
+  <app-experience
+    [experience]="profile.experience"
+    (newExperienceEvent)="onAddExperience($event)"
+  ></app-experience>
 </section>

@@ -12,7 +12,12 @@
       placeholder="Add New Experience"
       [(ngModel)]="newExperience"
     />
-    <button nz-button nzType="primary" (click)="onAddExperience()">
+    <button
+      nz-button
+      [disabled]="!newExperience"
+      nzType="primary"
+      (click)="onAddExperience()"
+    >
       Add New Experience
     </button>
   </section>
