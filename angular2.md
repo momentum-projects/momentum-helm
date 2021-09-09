@@ -27,6 +27,19 @@
 - ngAfterViewChecked
 - ngOnDestroy
 
+## exercise for today
+
+Today's exercise will be to continue refactoring of our application. We created a "Full profile editor" this morning.
+
+For the assignment, I'd like you to create a screen that lists all the profiles in a list. On here, it would allow you to create "connections" between profiles.
+
+- Show a list of each profile (a 3-4 line version so you could see 3-5 on a screen)
+- Assume you're using the site as profile `0`
+- Add a connect buttonand when you click "Connect" next to a profile it would save a connection and switch to a "Disconnect" button
+- Use at least 3 components with `Input` and `Output` to connect them together
+- *Bonus:* allow switching the user to be logged in as any profile
+- *Bonus:* hook in to Angular events to save/load the state
+
 ## referencing HTML elments
 
 1. [local references](https://www.codingdefined.com/2019/12/using-local-references-for-angular-html.html)
