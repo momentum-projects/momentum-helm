@@ -6,17 +6,16 @@ import Profile from '../profile.model';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   @Input() profile!: Profile;
+  @Input() profiles: Profile[];
   @Input() name!: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   onNewExperience(experience: string) {
-    this.profile.experience.push(experience)
+    this.profile.experience.push(experience);
   }
 
+  onNewConnection(connection: number) {
+    this.profile.connection.add(connection);
+  }
 }

@@ -10,7 +10,6 @@ export class ExperienceComponent  {
   @Output() newExperienceEvent = new EventEmitter<string>();
 
   newExperience: string = '';
-  
   onNewExperience() {
     this.newExperienceEvent.emit(this.newExperience);
   }

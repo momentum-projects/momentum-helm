@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
 import { ExperienceComponent } from './profile/experience.component';
+import { ConnectionComponent } from './profile/connection.component';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -29,6 +30,7 @@ registerLocaleData(en);
     Tictactoe1Component,
     ProfileComponent,
     ExperienceComponent,
+    ConnectionComponent,
   ],
   imports: [
     BrowserModule,

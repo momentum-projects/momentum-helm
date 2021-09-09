@@ -3,9 +3,15 @@
   <p>Last Name: {{ profile.lastName }}</p>
 </div>
 <div>
-  <app-experience 
+  <app-experience
     [experience]="profile.experience"
-    (newExperienceEvent)="onNewExperience($event)"        
+    (newExperienceEvent)="onNewExperience($event)"
   >
   </app-experience>
+  <app-connection
+    [connection]="profile.connection"
+    [profiles]="profiles"
+    (newConnectionEvent)="onNewConnection($event)"
+  >
+  </app-connection>
 </div>
