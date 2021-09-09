@@ -32,11 +32,6 @@ npm install --save-dev prettier prettier-eslint eslint-config-prettier
 ## Getting Oriented
 
 1. What happens when Angular starts? What's the difference between `index.html` in my codebase vs the one delivered in the browser?
-1. Creating a component - orient to files
-    - go over css
-    - templateUrl vs template
-    - adding a component manually
-1. activity - create two components
 
 ## Basics Components & Directives
 
@@ -49,13 +44,9 @@ npm install --save-dev prettier prettier-eslint eslint-config-prettier
     - encoding
     - string interpolation vs property binding (innerText)
 1. Reacting to Events - (click)
-1. *ngIf
-1. *ngFor
-1. *ngFor - trackBy
-1. ng-container
-1. *ngModel - needs imported via `import { FormsModule } from "@angular/forms";` and added to `imports` in `app.module.ts`
 
-## Activity 
+## Activity
+
 Build a tic-tac-toe game with Angular
 
 Include:
@@ -65,16 +56,30 @@ Include:
 - a grid with 3x3 and borders using CSS
 
 Bonus:
+
 - detect a win
 - beautiful styles
 - utilize `for` loop(s) to create the board
 
-## Angular Lesson 2 - Adding Ant Design
+## Angular Lesson 2
+
+1. *ngIf
+1. *ngFor
+1. *ngFor - trackBy
+1. ng-container
+1. *ngModel - needs imported via `import { FormsModule } from "@angular/forms";` and added to `imports` in `app.module.ts`
+1. Creating a component - orient to files
+    - go over css
+    - templateUrl vs template
+    - adding a component manually
+1. activity - create two components
+
+## Angular Lesson 3 - Adding Ant Design
 
 1. ngStyle
 1. ngClass
 1. install
-    - `ng add ng-zorro-antd`
+    - `ng add ng-zorro-antd` **dynamic loading YES; custom theme NO; language en_US**
     - restore `app.component.html`
     - remove `sipmle.css`
 1. [Ant Design](https://ng.ant.design)
@@ -89,5 +94,21 @@ Bonus:
 
 ## useful commands
 
-* run the server `ng serve`
-* run the linter `ng lint` and to fix problems `ng lint --fix`
+- run the server `ng serve`
+- run the linter `ng lint` and to fix problems `ng lint --fix`
+- create a component `ng generate component <name-of-component>` or `ng g c <name-of-component>`
+
+## adding git the remote
+
+1. starting in the "..." (top-right) menu on the "Source Control" in VS Code, click "Remote"
+1. click "Add Remote".
+1. Provide a url to the repository here: `https://github.com/momentum-projects/momentum-helm.git`.
+1. Provide a name like "momentum"
+
+Whenever you want to fetch new changes and merge from my repository:
+
+1. Click the "..." on the "Source Control" Tab
+1. Click "Pull/Push"
+1. Click "Pull from..."
+1. Click the repository you added earlier, "momentum"
+1. Click "momentum/main" as the branch

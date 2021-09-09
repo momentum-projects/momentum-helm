@@ -15,3 +15,10 @@ export const profiles = [
   new Profile('Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
   new Profile('Dee', 'Meyers', 'Ms.', ['Student 2020', 'Developer 2021']),
 ];
+
+export enum Direction {
+  Up = 1,
+  Down,
+  Left,
+  Right,
+}

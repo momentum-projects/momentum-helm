@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Profile, { profiles } from './profile.model';
+import Profile, { profiles, Direction } from './profile.model';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.firstProfileSet = 'Bob"&<head>';
+      this.firstProfileSet = 'Bob&<head>';
       this.profiles[1].firstName = 'Thomas';
     }, 3000);
   }
