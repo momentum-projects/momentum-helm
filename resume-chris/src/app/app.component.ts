@@ -6,10 +6,27 @@ import Profile, { profiles } from './profile.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  whoTurn;
-  gameWon;
-  board;
-  badMove;
+  profiles: Profile[] = profiles;
+  firstProfile() {
+    return this.profiles[0];
+  }
+
+  get firstProfileGet() {
+    return this.firstProfile();
+  }
+  set firstProfileSet(value: string) {
+    this.firstProfile().firstName = value;
+  }
+  onClick() {
+    this.firstProfileSet = 'Atul';
+  }
+
+  /////////////////////////////////////////////////////////////////
+  // Tic Tac Toe area
+  whoTurn: string;
+  gameWon: string;
+  board: string[][];
+  badMove: boolean;
 
   ngOnInit() {
     this.onStartOver();
