@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import Profile, { profiles } from './models/profile.model';
 
 @Component({
@@ -6,30 +6,7 @@ import Profile, { profiles } from './models/profile.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'resume-harry';
   profiles: Profile[] = profiles;
-
-  ngOnInit() {
-    setTimeout(() => {
-      this.firstProfileSet = 'Bob';
-      this.profiles[1].firstName = 'Thomas';
-    }, 3000);
-  }
-
-  firstProfile() {
-    return this.profiles[0];
-  }
-
-  get firstProfileGet() {
-    return this.firstProfile();
-  }
-
-  set firstProfileSet(value: string) {
-    this.firstProfile().firstName = value;
-  }
-
-  onClick() {
-    this.firstProfileSet = 'Atul';
-  }
 }
