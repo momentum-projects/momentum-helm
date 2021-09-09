@@ -1,0 +1,28 @@
+<router-outlet></router-outlet>
+
+<div>
+  <p>{{ firstProfile().firstName }}</p>
+  <p>{{ firstProfileGet.firstName }}</p>
+  <p>{{ profiles[1].firstName.toUpperCase() }}</p>
+  <p>{{ profiles[2].firstName }}</p>
+  <input [(ngModel)]="profiles[0].firstName" />
+  <div [innerText]="firstProfileGet.firstName"></div>
+  <button (click)="onClick()">change first name</button>
+  <button [ngStyle]="{ color: 'red' }" (click)="onClick()">
+    change first name
+  </button>
+  <button
+    [ngClass]="{ danger: profiles[0].firstName == 'David' }"
+    (click)="onClick()"
+  >
+    change first name
+  </button>
+  <button
+    [ngClass]="['danger']"
+    (click)="onClick()"
+  >
+    change first name again
+  </button>
+</div>
+
+<app-tictactoe></app-tictactoe>
