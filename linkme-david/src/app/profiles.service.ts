@@ -21,14 +21,21 @@ const PROFILES_KEY = 'profiles';
   providedIn: 'root',
 })
 export class ProfilesService {
-  private profiles = [
-    new Profile(1, 'David', 'Rasch', 'Mr.', [
-      'Developer 2020',
-      'Angular Instructor 2021',
-    ]),
-    new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
-    new Profile(3, 'Dee', 'Meyers', 'Ms.', ['Student 2020', 'Developer 2021']),
-  ];
+  profiles: Profile[] = [];
+
+  get defaultProfiles() {
+    return [
+      new Profile(1, 'David', 'Rasch', 'Mr.', [
+        'Developer 2020',
+        'Angular Instructor 2021',
+      ]),
+      new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
+      new Profile(3, 'Dee', 'Meyers', 'Ms.', [
+        'Student 2020',
+        'Developer 2021',
+      ]),
+    ];
+  }
   decodeProfile(json: Profile): Profile {
     let profile = Object.create(Profile.prototype);
     return Object.assign(profile, json);
@@ -40,6 +47,10 @@ export class ProfilesService {
     this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
       (obj: Profile) => this.decodeProfile(obj)
     );
+
+    if (this.profiles.length == 0) {
+      this.profiles = this.defaultProfiles;
+    }
   }
   save() {
     localStorage.setItem(PROFILES_KEY, JSON.stringify(this.profiles));
