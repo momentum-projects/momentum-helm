@@ -4,9 +4,8 @@
   <nz-header>
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item>nav 1</li>
-      <li nz-menu-item>nav 2</li>
-      <li nz-menu-item>nav 3</li>
+      <li (click)="changePage('profile')" nz-menu-item>Profiles</li>
+      <li (click)="changePage('connections')" nz-menu-item>Connections</li>
     </ul>
   </nz-header>
   <nz-content>
@@ -28,16 +27,18 @@
       </nz-dropdown-menu>
     </div>
     <nz-breadcrumb>
-      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-      <nz-breadcrumb-item>List</nz-breadcrumb-item>
-      <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        {{ loginService.getCurrentProfile().name }}
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        {{ this.pageName | titlecase }}
+      </nz-breadcrumb-item>
     </nz-breadcrumb>
     <div class="inner-content">
-      <app-profile
-        [profile]="loginService.getCurrentUser()"
-        name="Profile Editing Page"
-      ></app-profile>
-      <app-connections></app-connections>
+      <app-profiles *ngIf="this.pageSelected == 'profile'"></app-profiles>
+      <app-connections
+        *ngIf="this.pageSelected == 'connections'"
+      ></app-connections>
     </div>
   </nz-content>
   <nz-footer>Designed by Helm and Momoentum Crew</nz-footer>

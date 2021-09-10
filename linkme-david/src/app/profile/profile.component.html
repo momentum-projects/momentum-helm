@@ -5,7 +5,10 @@
     <p>Last Name: {{ profileObject.lastName }}</p>
   </div>
 
-  <app-experience [profile]="profile"></app-experience>
+  <app-experience
+    [editable]="editable"
+    [profile]="profile"
+  ></app-experience>
 </div>
 
 <ng-template #noProfile>No profile found</ng-template>
