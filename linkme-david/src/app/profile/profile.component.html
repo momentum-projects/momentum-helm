@@ -1,5 +1,5 @@
 <h1 nz-typography>{{ name }}</h1>
-
+<div *ngIf="profileObject; else noProfile">
 <div>
   <p>First Name: {{ profileObject.firstName }}</p>
   <p>Last Name: {{ profileObject.lastName }}</p>
@@ -11,3 +11,5 @@
   <p morestuff>This is some more stuff in a separate element</p>
   <p #morestuff>this will be loaded into ContentChild</p>
 </app-experience>
+</div>
+<ng-template #noProfile>No profile found</ng-template>
