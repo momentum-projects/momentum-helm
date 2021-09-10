@@ -223,13 +223,13 @@ export const environment = {
 Today's exercise will be a collection of incremental improvements to your application. Some of these will overlap with refactorings we did together. Some won't.
 
 1. Migrate any models to injected services
-1. Add saving and loading of the data using services and lifecycle hooks to load and save to `localStorage`.
+1. Add saving and loading of the data using services during construction and modification to load and save to `localStorage`.
 1. Add a "login" function that sets the current user using a `login` service
 1. Add "navigation" between your connections component and your profile editing (/and viewing) component
 1. Allow the user to navigate between all the profiles
 1. Allow the user to edit _their_ profile, but only _view_ others' profiles
 1. Add a button to delete experience lines
-1. Add a "connect" to profiles that aren't their own, use a shared component with the "connections" screen.
+1. Add a "connect" to the profiles component that aren't their own, use a shared component with the "connections" screen.
 1. Sort the connections components to show people you're _not_ connected with at the top in a separate section, followed by people you _are_ connected with.
 
 ## Exercise - bonus
