@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import Profile from '../profile.model';
+import { ProfilesService } from '../profiles.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,12 +7,12 @@ import Profile from '../profile.model';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  @Input() profile!: Profile;
+  @Input() profile!: number;
   @Input() name!: string;
 
-  constructor() {}
+  constructor(public profilesService: ProfilesService) {}
 
-  onNewExperience(experience: string) {
-    this.profile.experience.push(experience);
+  get profileObject() {
+    return this.profilesService.getProfile(this.profile);
   }
 }
