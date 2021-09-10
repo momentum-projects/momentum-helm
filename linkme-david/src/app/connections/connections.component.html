@@ -1,27 +1,23 @@
 <ul>
   <li *ngFor="let profile of profilesService.getProfiles()">
     {{ profile.name }}
-    <button
-      *ngIf="
-        profile.id != loginService.getCurrentUser() &&
-        !profilesService.isConnected(profile.id, loginService.getCurrentUser())
-      "
-      (click)="
-        profilesService.connect(profile.id, loginService.getCurrentUser())
-      "
-    >
-      Connect
-    </button>
-    <button
-      *ngIf="
-        profile.id != loginService.getCurrentUser() &&
-        profilesService.isConnected(profile.id, loginService.getCurrentUser())
-      "
-      (click)="
-        profilesService.disconnect(profile.id, loginService.getCurrentUser())
-      "
-    >
-      Disconnect
-    </button>
+    <span *ngIf="!isCurrentUser(profile.id)">
+      <button
+        *ngIf="!isConnected(profile.id)"
+        (click)="
+          profilesService.connect(profile.id, loginService.getCurrentUser())
+        "
+      >
+        Connect
+      </button>
+      <button
+        *ngIf="isConnected(profile.id)"
+        (click)="
+          profilesService.disconnect(profile.id, loginService.getCurrentUser())
+        "
+      >
+        Disconnect
+      </button>
+    </span>
   </li>
 </ul>
