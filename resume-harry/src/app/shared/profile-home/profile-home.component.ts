@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile, ProfileService } from './shared/services/profile.service';
-import * as _ from 'lodash';
+import _ from 'lodash';
+import { Profile, ProfileService } from '../services/profile.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-profile-home',
+  templateUrl: './profile-home.component.html',
+  styleUrls: ['./profile-home.component.scss']
 })
-export class AppComponent implements OnInit {
+export class ProfileHomeComponent implements OnInit {
   title = 'resume-harry';
   profiles: Profile[] = [];
   currentUserId = 0;

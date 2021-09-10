@@ -18,8 +18,7 @@
   <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
     <div nz-col nzFlex="auto">
       <app-experience
-        [experience]="profile.experience"
-        (newExperienceEvent)="onAddExperience($event)"
+        [profile]="profile"
       ></app-experience>
     </div>
     <div nz-col>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Profile } from '../services/profile.service';
+import { Profile, ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-log-in',
@@ -7,7 +7,14 @@ import { Profile } from '../services/profile.service';
   styleUrls: ['./log-in.component.scss'],
 })
 export class LogInComponent {
-  @Input() profiles!: Profile[];
   @Output() activeUserEvent = new EventEmitter<number>();
+  profiles!: Profile[];
   currentUserId!: number;
+
+  constructor(public profilesService: ProfileService) {}
+
+  ngOnInit() {
+    this.profiles = this.profilesService.profiles;
+  }
+
 }

@@ -1,37 +1,15 @@
-<router-outlet></router-outlet>
 <nz-layout>
   <nz-header>
     <div class="logo"></div>
-    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+    <!-- <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item>nav 1</li>
       <li nz-menu-item>nav 2</li>
       <li nz-menu-item>nav 3</li>
-    </ul>
+    </ul> -->
   </nz-header>
   <nz-content>
     <div class="inner-content">
-      <div *ngIf="!currentUserId; then thenBlock; else elseBlock"></div>
-      <ng-template #thenBlock>
-        <app-log-in
-          [ngModel]="currentUserId"
-          [profiles]="profiles"
-          (activeUserEvent)="setActiveUser($event)"
-          ngDefaultControl
-        ></app-log-in>
-      </ng-template>
-      <ng-template #elseBlock>
-        <h1 nz-typography>Profile Editing Page</h1>
-        <div *ngFor="let profile of profiles">
-          <div *ngIf="profile.userId !== currentUserId; then thenBlock"></div>
-          <ng-template #thenBlock>
-            <app-profile
-              [profile]="profile"
-              [currentUserId]="currentUserId"
-              (newConnectionEvent)="alterConnection($event)"
-            ></app-profile>
-          </ng-template>
-        </div>
-      </ng-template>
+      <router-outlet></router-outlet>
     </div>
   </nz-content>
 

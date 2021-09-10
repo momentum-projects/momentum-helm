@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Profile } from '../services/profile.service';
+import { Profile, ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +12,13 @@ export class ProfileComponent {
   @Input() profile!: Profile;
   @Output() newConnectionEvent = new EventEmitter<number>();
 
-  onAddExperience(experience: string) {
-    this.profile.experience.push(experience);
-  }
+  constructor(public profileService: ProfileService) {}
 
   alterConnection(userId: number) {
     this.newConnectionEvent.emit(userId);
+  }
+
+  get profileObject() {
+    return this.profileService.getProfile(this.profile.userId);
   }
 }

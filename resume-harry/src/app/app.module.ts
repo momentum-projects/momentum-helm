@@ -26,6 +26,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { LogInComponent } from './shared/log-in/log-in.component';
 import { ProfileService } from './shared/services/profile.service';
+import { GraphQLModule } from './graphql.module';
+import { ProfileHomeComponent } from './shared/profile-home/profile-home.component';
 
 registerLocaleData(en);
 
@@ -36,6 +38,7 @@ registerLocaleData(en);
     ExperienceComponent,
     ConnectButtonComponent,
     LogInComponent,
+    ProfileHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ registerLocaleData(en);
     NzGridModule,
     NzCardModule,
     NzInputNumberModule,
+    GraphQLModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ProfileService],
   bootstrap: [AppComponent],

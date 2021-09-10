@@ -4,6 +4,11 @@
     <i nz-icon nzType="minus" style="font-size: 16px"></i>
     {{ experienceLine }}
   </h5>
+  <h6 nz-typography nzType="secondary">GitHub Repositories</h6>
+  <h5 nz-typography *ngFor="let repository of repositories">
+    <i nz-icon nzType="minus" style="font-size: 16px"></i>
+    <a [href]="repository.url">{{ repository.name }}</a>
+  </h5>
   <!--  <br />-->
   <!--      <section>-->
   <!--        <input-->
