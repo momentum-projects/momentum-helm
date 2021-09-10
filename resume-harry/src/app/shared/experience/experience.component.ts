@@ -1,14 +1,7 @@
-import {
-  Component,
-  ContentChild,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Profile, ProfileService } from '../services/profile.service';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-experience',
@@ -16,7 +9,7 @@ import { Profile, ProfileService } from '../services/profile.service';
   styleUrls: ['./experience.component.scss'],
 })
 export class ExperienceComponent {
-  @Input() profile!: Profile;
+  @Input() profile!: number;
   newExperience = '';
   repositories!: Repository[];
   avatarUrl?: string;
@@ -31,11 +24,11 @@ export class ExperienceComponent {
   }
 
   get experience() {
-    return this.profileService.getProfile(this.profile.userId).experience;
+    return this.profileService.getProfile(this.profile)?.experience;
   }
 
   onNewExperience() {
-    this.profileService.addExperience(this.profile.userId, this.newExperience);
+    this.profileService.addExperience(this.profile, this.newExperience);
   }
 
   loadRepositories() {
@@ -57,11 +50,8 @@ export class ExperienceComponent {
         `,
       })
       .valueChanges.subscribe(({ data }: any) => {
-        console.log(data);
         this.avatarUrl = data?.user?.avatarUrl || null;
         this.repositories = data?.user?.repositories?.nodes || [];
-        console.log(this.avatarUrl)
-        console.log(this.repositories)
       });
   }
 }

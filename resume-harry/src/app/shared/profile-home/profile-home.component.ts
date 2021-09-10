@@ -1,86 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import _ from 'lodash';
 import { Profile, ProfileService } from '../services/profile.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile-home',
   templateUrl: './profile-home.component.html',
-  styleUrls: ['./profile-home.component.scss']
+  styleUrls: ['./profile-home.component.scss'],
 })
 export class ProfileHomeComponent implements OnInit {
   title = 'resume-harry';
   profiles: Profile[] = [];
-  currentUserId = 0;
 
-  constructor(public profilesService: ProfileService) {}
+  constructor(
+    public profileService: ProfileService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit() {
-    this.profiles = this.profilesService.profiles;
+    this.profiles = this.allProfileData;
   }
 
-  activeUser() {
-    return _.find(this.profiles, 'isActive');
+  get allProfileData() {
+    return this.profileService.profiles;
   }
 
-  setActiveUser(userId: number) {
-    this.profiles = _.reduce(
-      this.profiles,
-      (updatedProfiles: Profile[], profileInstance: Profile) => {
-        if (profileInstance.userId === userId) {
-          profileInstance.isActive = true;
-          updatedProfiles.push(profileInstance);
-        } else {
-          updatedProfiles.push(profileInstance);
-        }
-        return updatedProfiles;
-      },
-      []
+  logout() {
+    this.profileService.accountLogout(
+      this.profileService.getCurrentUserLoggedIn()
     );
-    this.currentUserId = userId;
-  }
-
-  alterConnection(connectionEventId: number) {
-    this.profiles = _.reduce(
-      this.profiles,
-      (updatedProfiles: Profile[], profileInstance: Profile) => {
-        if (
-          profileInstance.userId === this.currentUserId &&
-          !profileInstance.connections.includes(connectionEventId)
-        ) {
-          profileInstance.connections.push(connectionEventId);
-          updatedProfiles.push(profileInstance);
-        } else if (
-          profileInstance.userId === connectionEventId &&
-          !profileInstance.connections.includes(this.currentUserId)
-        ) {
-          profileInstance.connections.push(this.currentUserId);
-          updatedProfiles.push(profileInstance);
-        } else if (
-          profileInstance.userId === this.currentUserId &&
-          profileInstance.connections.includes(connectionEventId)
-        ) {
-          profileInstance.connections = profileInstance.connections.filter(
-            (item) => {
-              return item !== connectionEventId;
-            }
-          );
-          updatedProfiles.push(profileInstance);
-        } else if (
-          profileInstance.userId === connectionEventId &&
-          profileInstance.connections.includes(this.currentUserId)
-        ) {
-          profileInstance.connections = profileInstance.connections.filter(
-            (item) => {
-              return item !== this.currentUserId;
-            }
-          );
-          updatedProfiles.push(profileInstance);
-        } else {
-          updatedProfiles.push(profileInstance);
-        }
-        return updatedProfiles;
-      },
-      []
-    );
+    this.auth.logout();
   }
 }

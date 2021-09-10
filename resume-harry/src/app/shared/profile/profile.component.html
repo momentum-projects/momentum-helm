@@ -9,25 +9,20 @@
   </div>
   <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
     <div nz-col nzSpan="8" class="gutter-row">
-      <h4 nz-typography>{{ profile.firstName }}</h4>
+      <h4 nz-typography>{{ profileObject?.firstName }}</h4>
     </div>
     <div nz-col nzSpan="8" class="gutter-row">
-      <h4 nz-typography>{{ profile.lastName }}</h4>
+      <h4 nz-typography>{{ profileObject?.lastName }}</h4>
     </div>
   </div>
   <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
     <div nz-col nzFlex="auto">
-      <app-experience
-        [profile]="profile"
-      ></app-experience>
+      <app-experience [profile]="profile"></app-experience>
     </div>
     <div nz-col>
       <app-connect-button
-        [currentUserId]="currentUserId"
         [profile]="profile"
-        [userId]="profile.userId"
         ngDefaultControl
-        (newConnectionEvent)="alterConnection($event)"
       ></app-connect-button>
     </div>
   </div>

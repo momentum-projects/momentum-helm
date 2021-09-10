@@ -5,7 +5,7 @@
       <nz-input-number
         [(ngModel)]="currentUserId"
         [nzMin]="0"
-        [nzMax]="profiles.length - 1"
+        [nzMax]="profileService.load().length - 1"
         style="width: 100%"
         ngDefaultControl
       ></nz-input-number>
@@ -17,7 +17,9 @@
         nz-button
         [disabled]="!currentUserId"
         nzType="primary"
-        (click)="activeUserEvent.emit(currentUserId)"
+        (click)="setCurrentUserLoggedIn(currentUserId)"
+        routerLink="/home"
+        routerLinkActive="active"
         nzBlock
       >
         Log In

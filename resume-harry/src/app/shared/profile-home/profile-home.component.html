@@ -1,8 +1,8 @@
 <h1 nz-typography>Profile Editing Page</h1>
-<div *ngFor="let profile of profiles">
-  <app-profile
-    [profile]="profile"
-    [currentUserId]="currentUserId"
-    (newConnectionEvent)="alterConnection($event)"
-  ></app-profile>
+<button nz-button (click)="logout()">Log Out</button>
+<div *ngFor="let profile of allProfileData">
+  <div *ngIf="!profile.isActive; then thenBlock"></div>
+  <ng-template #thenBlock>
+    <app-profile [profile]="profile.id"></app-profile>
+  </ng-template>
 </div>

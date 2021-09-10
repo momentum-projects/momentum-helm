@@ -7,18 +7,11 @@ import { Profile, ProfileService } from '../services/profile.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  @Input() name!: string;
-  @Input() currentUserId!: number;
-  @Input() profile!: Profile;
-  @Output() newConnectionEvent = new EventEmitter<number>();
+  @Input() profile!: number;
 
   constructor(public profileService: ProfileService) {}
 
-  alterConnection(userId: number) {
-    this.newConnectionEvent.emit(userId);
-  }
-
   get profileObject() {
-    return this.profileService.getProfile(this.profile.userId);
+    return this.profileService.getProfile(this.profile);
   }
 }

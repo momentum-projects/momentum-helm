@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { Profile } from '../services/profile.service';
+import { Component, Input } from '@angular/core';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-connect-button',
@@ -7,18 +7,50 @@ import { Profile } from '../services/profile.service';
   styleUrls: ['./connect-button.component.scss'],
 })
 export class ConnectButtonComponent {
-  @Input() userId!: number;
-  @Input() profile!: Profile;
-  @Input() currentUserId!: number;
-  @Output() newConnectionEvent = new EventEmitter<number>();
+  @Input() profileId!: number;
+  @Input() profile!: number;
 
-  alterConnection(userId: number) {
-    this.newConnectionEvent.emit(userId);
+  constructor(public profileService: ProfileService) {}
+
+  alterConnection() {
+    if (
+      !this.profileObject?.connections.find(
+        (num) => num == this.currentActiveUser
+      )
+    ) {
+      if (this.currentActiveUser && this.profileObject) {
+        this.profileService.connect(
+          this.currentActiveUser,
+          this.profileObject.id
+        );
+      }
+    } else {
+      if (this.currentActiveUser && this.profileObject) {
+        this.profileService.disconnect(
+          this.currentActiveUser,
+          this.profileObject.id
+        );
+      }
+    }
+  }
+
+  get currentActiveUser() {
+    return this.profileService.getCurrentUserLoggedIn()
+      ? this.profileService.getCurrentUserLoggedIn()
+      : false;
   }
 
   get buttonTextString() {
-    return this.profile.connections.includes(this.currentUserId)
-      ? 'Disconnect'
-      : 'Connect';
+    if (this.currentActiveUser) {
+      return this.profileObject?.connections.includes(this.currentActiveUser)
+        ? 'Disconnect'
+        : 'Connect';
+    } else {
+      return null;
+    }
+  }
+
+  get profileObject() {
+    return this.profileService.getProfile(this.profile);
   }
 }
