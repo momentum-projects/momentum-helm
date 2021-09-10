@@ -21,7 +21,7 @@ export const environment = {
 };
 ```
 
-1. `ng add apollo-angular`
+1. `ng add apollo-angular` endpoint: `https://api.github.com/graphql`
 
 
 

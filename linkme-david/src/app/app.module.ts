@@ -20,6 +20,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { ExperienceComponent } from './profile/experience.component';
 import { ProfilesService } from './profiles.service';
+import { GraphQLModule } from './graphql.module';
 
 registerLocaleData(en);
 
@@ -37,6 +38,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     NzTypographyModule,
+    GraphQLModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ProfilesService],
   bootstrap: [AppComponent],
