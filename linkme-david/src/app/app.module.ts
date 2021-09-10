@@ -15,9 +15,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { ExperienceComponent } from './profile/experience.component';
 import { ProfilesService } from './profiles.service';
 import { GraphQLModule } from './graphql.module';
@@ -41,6 +42,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzBreadCrumbModule,
     NzButtonModule,
+    NzDropDownModule,
     NzInputModule,
     NzLayoutModule,
     NzMenuModule,
