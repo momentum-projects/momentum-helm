@@ -21,11 +21,18 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { ExperienceComponent } from './profile/experience.component';
 import { ProfilesService } from './profiles.service';
 import { GraphQLModule } from './graphql.module';
+import { ConnectionsComponent } from './connections/connections.component';
+import { LoginService } from './login.service';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, ProfileComponent, ExperienceComponent],
+  declarations: [
+    AppComponent,
+    ProfileComponent,
+    ExperienceComponent,
+    ConnectionsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +47,11 @@ registerLocaleData(en);
     NzTypographyModule,
     GraphQLModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, ProfilesService],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    ProfilesService,
+    LoginService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

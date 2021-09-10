@@ -38,7 +38,7 @@ export class ExperienceComponent implements OnInit, AfterContentInit {
   }
 
   get experience() {
-    return this.profilesService.getProfile(this.profile).experience;
+    return this.profilesService.getProfile(this.profile)?.experience || [];
   }
 
   onNewExperience() {
