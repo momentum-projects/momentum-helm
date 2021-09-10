@@ -1,6 +1,6 @@
 <div>
   <h2>Experience</h2>
-  <div>
+  <div *ngIf="editable">
     <nz-input-group nzCompact>
       <input
         #myLocalRef
@@ -8,14 +8,12 @@
         placeholder="your experience"
         [(ngModel)]="newExperience"
         type="text"
-        style="width: 80%"
       />
       <button
         [disabled]="!newExperience"
         nz-button
         nzType="primary"
         (click)="onNewExperience()"
-        style="width: 20%"
       >
         Add new
       </button>

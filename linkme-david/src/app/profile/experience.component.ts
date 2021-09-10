@@ -9,6 +9,7 @@ import { ProfilesService } from '../profiles.service';
 })
 export class ExperienceComponent implements OnInit {
   @Input() profile!: number;
+  @Input() editable!: boolean;
 
   newExperience: string = '';
   repositories: Repository[] = [];

@@ -35,11 +35,7 @@
       </nz-breadcrumb-item>
     </nz-breadcrumb>
     <div class="inner-content">
-      <app-profile
-        *ngIf="this.pageSelected == 'profile'"
-        [profile]="loginService.getCurrentUser()"
-        name="Profile Editing Page"
-      ></app-profile>
+      <app-profiles *ngIf="this.pageSelected == 'profile'"></app-profiles>
       <app-connections
         *ngIf="this.pageSelected == 'connections'"
       ></app-connections>

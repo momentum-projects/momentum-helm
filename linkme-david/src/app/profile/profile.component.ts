@@ -9,6 +9,7 @@ import { ProfilesService } from '../profiles.service';
 export class ProfileComponent {
   @Input() profile!: number;
   @Input() name!: string;
+  @Input() editable!: boolean;
 
   constructor(public profilesService: ProfilesService) {}
 
