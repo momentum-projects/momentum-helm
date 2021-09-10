@@ -66,7 +66,7 @@ export class ProfilesService {
     const secondProfile = this.getProfile(second);
 
     if (!firstProfile || !secondProfile) {
-      throw 'Tried connecting to non-existant profile(s)';
+      throw 'Tried disconnecting non-existant profile(s)';
     }
 
     let found = firstProfile.connections.findIndex((num) => num == second);
@@ -84,7 +84,7 @@ export class ProfilesService {
     const secondProfile = this.getProfile(second);
 
     if (!firstProfile || !secondProfile) {
-      throw 'Tried connecting to non-existant profile(s)';
+      throw 'Tried checking connections for non-existant profile(s)';
     }
 
     return firstProfile.connections.find((num) => num == second);
