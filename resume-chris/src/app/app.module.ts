@@ -23,6 +23,7 @@ import { ProfilesService } from './profiles.service';
 import { GraphQLModule } from './graphql.module';
 import { ConnectionsComponent } from './connections/connections.component';
 import { LoginService } from './login.service';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 registerLocaleData(en);
 
@@ -45,6 +46,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     NzTypographyModule,
+    NzDropDownModule,
     GraphQLModule,
   ],
   providers: [

@@ -6,7 +6,7 @@ export default class Profile {
     public firstName: string,
     public lastName: string,
     public title: string,
-    public experience: string[],
+    public experience: string[] = [],
     public connections: number[] = []
   ) {}
 
@@ -15,11 +15,13 @@ export default class Profile {
   }
 }
 
+const PROFILE_KEY = 'profiles';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProfilesService {
-  private profiles = [
+  private profiles: Profile[] = [
     new Profile(0, 'Chris', 'Athanas', 'Mr.', [
       'Android Developer 2020',
       'Thai Mat Bodyworker',
@@ -31,24 +33,49 @@ export class ProfilesService {
     new Profile(2, 'Dee', 'Meyers', 'Ms.', ['Student 2020', 'Devloper 2021']),
   ];
 
-  constructor() {}
+  constructor() {
+    // if localStorage profiles are empty, populate them with our default data
+    if (window.localStorage.getItem(PROFILE_KEY) == null) {
+      this.saveProfilesToLocalStorage();
+    }
+    this.loadProfilesFromLocalStorage();
+  }
 
   getProfiles() {
     return this.profiles;
   }
   addProfile(profile: Profile) {
     this.profiles.push(profile);
+    this.saveProfilesToLocalStorage();
   }
-  getProfile(index: number) {
-    console.log(index);
-    console.log(this.profiles);
+  getProfile(index: number): Profile | null | undefined {
     return this.profiles.find((profile) => profile.id == index);
+  }
+  saveProfilesToLocalStorage() {
+    window.localStorage.setItem(PROFILE_KEY, JSON.stringify(this.profiles));
+  }
+  loadProfilesFromLocalStorage() {
+    this.profiles = JSON.parse(
+      window.localStorage.getItem(PROFILE_KEY) || '[]'
+    ).map(
+      (obj: any) =>
+        new Profile(
+          obj.id,
+          obj.firstName,
+          obj.lastName,
+          obj.title,
+          obj.experience,
+          obj.connections
+        )
+    );
   }
   addExperience(index: number, experience: string) {
     const profile = this.getProfile(index);
 
     if (profile) {
-      return profile.experience.push(experience);
+      profile.experience.push(experience);
+      this.saveProfilesToLocalStorage();
+      return;
     } else {
       throw 'Profile does not exist';
     }
@@ -66,6 +93,7 @@ export class ProfilesService {
     if (!secondProfile.connections.find((num) => num == first)) {
       secondProfile.connections.push(first);
     }
+    this.saveProfilesToLocalStorage();
   }
   disconnect(first: number, second: number) {
     const firstProfile = this.getProfile(first);
@@ -84,6 +112,7 @@ export class ProfilesService {
     if (found >= 0) {
       secondProfile.connections.splice(found, 1);
     }
+    this.saveProfilesToLocalStorage();
   }
   isConnected(first: number, second: number) {
     const firstProfile = this.getProfile(first);
@@ -96,3 +125,7 @@ export class ProfilesService {
     return firstProfile.connections.find((num) => num == second);
   }
 }
+function obj(obj: any, arg1: (Profile: any) => Profile): Profile[] {
+  throw new Error('Function not implemented.');
+}
+

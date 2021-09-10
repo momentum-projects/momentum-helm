@@ -12,4 +12,9 @@ export class ConnectionsComponent {
     public profilesService: ProfilesService,
     public loginService: LoginService
   ) {}
+
+  isCurrentUser(profileId: number) {
+    return this.loginService.getCurrentUser() == profileId;
+  }
+
 }

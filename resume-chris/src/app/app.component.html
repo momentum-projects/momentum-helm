@@ -2,13 +2,14 @@
 
 <nz-layout>
   <nz-header>
-    <div class="logo"></div>
+    <div class="logo">WinkedIn</div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item>nav 1</li>
       <li nz-menu-item>nav 2</li>
       <li nz-menu-item>nav 3</li>
     </ul>
   </nz-header>
+ 
   <nz-content>
     <nz-breadcrumb>
       <nz-breadcrumb-item>Home</nz-breadcrumb-item>
@@ -16,6 +17,18 @@
       <nz-breadcrumb-item>App</nz-breadcrumb-item>
     </nz-breadcrumb>
     <div class="inner-content">
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        Login User
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li *ngFor="let profile of profilesService.getProfiles()">
+            {{ profile.lastName }}
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
       <app-profile [profile]="1" name="Profile Editing Page"></app-profile>
       <app-connections></app-connections>
     </div>
