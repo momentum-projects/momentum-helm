@@ -34,8 +34,6 @@ export class ProfilesService {
     this.profiles.push(profile);
   }
   getProfile(index: number) {
-    console.log(index);
-    console.log(this.profiles);
     return this.profiles.find((profile) => profile.id == index);
   }
   addExperience(index: number, experience: string) {
