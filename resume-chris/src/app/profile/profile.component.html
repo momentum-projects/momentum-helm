@@ -1,17 +1,15 @@
-<div>
-  <p>First Name: {{ profile.firstName }}</p>
-  <p>Last Name: {{ profile.lastName }}</p>
-</div>
-<div>
-  <app-experience
-    [experience]="profile.experience"
-    (newExperienceEvent)="onNewExperience($event)"
-  >
+<h1 nz-typography>{{ name }}</h1>
+<div *ngIf="profileObject; else noProfile">
+  <div>
+    <p>First Name: {{ profileObject.firstName }}</p>
+    <p>Last Name: {{ profileObject.lastName }}</p>
+  </div>
+
+  <app-experience [profile]="profile">
+    <p>This is some content</p>
+    <div>more content, divs</div>
+    <p morestuff>This is some more stuff in a separate element</p>
+    <p #morestuff>this will be loaded into ContentChild</p>
   </app-experience>
-  <app-connection
-    [connection]="profile.connection"
-    [profiles]="profiles"
-    (newConnectionEvent)="onNewConnection($event)"
-  >
-  </app-connection>
 </div>
+<ng-template #noProfile>No profile found</ng-template>

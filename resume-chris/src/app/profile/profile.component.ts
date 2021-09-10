@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProfilesService } from '../profiles.service';
 
 @Component({
@@ -7,21 +7,12 @@ import { ProfilesService } from '../profiles.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  @Input() profile!: Profile;
-  @Input() profiles: Profile[];
+  @Input() profile!: number;
   @Input() name!: string;
-  profilesService: ProfilesService;
 
-  constructor() {
-    this.profilesService = new ProfilesService();
-  }
+  constructor(public profilesService: ProfilesService) {}
 
-  onNewExperience(experience: string) {
-    this.profile.experience.push(experience);
-    this.profilesService.addExperience(this.profile, experience)
-  }
-
-  onNewConnection(connection: number) {
-    this.profile.connection.add(connection);
+  get profileObject() {
+    return this.profilesService.getProfile(this.profile);
   }
 }

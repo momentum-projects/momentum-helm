@@ -13,14 +13,14 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   };
 }
 
-const authLink = setContext((_, { headers}) => {
+const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
       authorization: 'Bearer ' + environment.githubToken,
-    }
-  }
-}
+    },
+  };
+});
 
 @NgModule({
   providers: [

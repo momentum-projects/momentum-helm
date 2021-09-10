@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Tictactoe2Component } from './tictactoe2/tictactoe2.component';
-import { Tictactoe1Component } from './tictactoe1/tictactoe1.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -13,26 +12,26 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
-import { ExperienceComponent } from './profile/experience.component';
-import { ConnectionComponent } from './profile/connection.component';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { ExperienceComponent } from './profile/experience.component';
 import { ProfilesService } from './profiles.service';
 import { GraphQLModule } from './graphql.module';
+import { ConnectionsComponent } from './connections/connections.component';
+import { LoginService } from './login.service';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    Tictactoe2Component,
-    Tictactoe1Component,
     ProfileComponent,
     ExperienceComponent,
-    ConnectionComponent,
+    ConnectionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,14 +39,19 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzLayoutModule,
-    NzTypographyModule,
+    NzBreadCrumbModule,
     NzButtonModule,
     NzInputModule,
+    NzLayoutModule,
     NzMenuModule,
+    NzTypographyModule,
     GraphQLModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, ProfilesService],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    ProfilesService,
+    LoginService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

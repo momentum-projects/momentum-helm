@@ -1,19 +1,36 @@
 <div>
   <h2>Experience</h2>
   <div>
-    <input
-      nz-input
-      placeholder="your experience"
-      [(ngModel)]="newExperience"
-      type="text"
-    />
-    <button nz-button nzType="primary" (click)="onNewExperience()">
-      Add New Experience
-    </button>
+    <nz-input-group nzCompact>
+      <input
+        #myLocalRef
+        nz-input
+        placeholder="your experience"
+        [(ngModel)]="newExperience"
+        type="text"
+        style="width: 80%"
+      />
+      <button
+        [disabled]="!newExperience"
+        nz-button
+        nzType="primary"
+        (click)="onNewExperience()"
+        style="width: 20%"
+      >
+        Add new
+      </button>
+    </nz-input-group>
   </div>
   <ul>
     <li *ngFor="let experienceLine of experience">
       {{ experienceLine }}
+    </li>
+  </ul>
+
+  <h2>Github Repositories</h2>
+  <ul>
+    <li *ngFor="let repository of repositories">
+      <a [href]="repository.url">{{ repository.name }}</a>
     </li>
   </ul>
 </div>

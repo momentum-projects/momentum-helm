@@ -1,10 +1,8 @@
 <router-outlet></router-outlet>
 
-<!-- <app-profile [profile]="profiles[0]" name="Profile Editing Page"></app-profile> -->
-
 <nz-layout>
   <nz-header>
-    <div class="logo">Edit Profile</div>
+    <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item>nav 1</li>
       <li nz-menu-item>nav 2</li>
@@ -12,18 +10,15 @@
     </ul>
   </nz-header>
   <nz-content>
-    <!-- <nz-breadcrumb>
+    <nz-breadcrumb>
       <nz-breadcrumb-item>Home</nz-breadcrumb-item>
       <nz-breadcrumb-item>List</nz-breadcrumb-item>
       <nz-breadcrumb-item>App</nz-breadcrumb-item>
-    </nz-breadcrumb> -->
+    </nz-breadcrumb>
     <div class="inner-content">
-      <app-profile
-        [profile]="profiles[0]"
-        [profiles]="profiles"
-        name="Profile Editing Page"
-      ></app-profile>
+      <app-profile [profile]="1" name="Profile Editing Page"></app-profile>
+      <app-connections></app-connections>
     </div>
   </nz-content>
-  <nz-footer>Designed by Helm and Momentum Crew</nz-footer>
+  <nz-footer>Designed by Helm and Momoentum Crew</nz-footer>
 </nz-layout>
