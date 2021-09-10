@@ -1,15 +1,13 @@
-<h1>{{ name }}</h1>
+<h1 nz-typography>{{ name }}</h1>
 
 <div>
-  <p>First Name: {{ profile.firstName }}</p>
-  <p>Last Name: {{ profile.firstName }}</p>
+  <p>First Name: {{ profileObject.firstName }}</p>
+  <p>Last Name: {{ profileObject.lastName }}</p>
 </div>
 
-<div>
-  <h2>Experience</h2>
-  <ul>
-    <li *ngFor="let experienceLine of profile.experience">
-      {{ experienceLine }}
-    </li>
-  </ul>
-</div>
+<app-experience [profile]="profile">
+  <p>This is some content</p>
+  <div>more content, divs</div>
+  <p morestuff>This is some more stuff in a separate element</p>
+  <p #morestuff>this will be loaded into ContentChild</p>
+</app-experience>

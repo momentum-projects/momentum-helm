@@ -1,3 +1,23 @@
 <router-outlet></router-outlet>
 
-<app-profile [profile]="profiles[0]" name="Profile Editing Page"></app-profile>
+<nz-layout>
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item>nav 1</li>
+      <li nz-menu-item>nav 2</li>
+      <li nz-menu-item>nav 3</li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+      <nz-breadcrumb-item>List</nz-breadcrumb-item>
+      <nz-breadcrumb-item>App</nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <div class="inner-content">
+      <app-profile [profile]="0" name="Profile Editing Page"></app-profile>
+    </div>
+  </nz-content>
+  <nz-footer>Designed by Helm and Momoentum Crew</nz-footer>
+</nz-layout>
