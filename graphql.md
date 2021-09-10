@@ -4,7 +4,7 @@
 
 1. [Countries](https://countries.trevorblades.com/)
 
-```
+```text
 GET -> https://www.example.com/api/users/
 <- list of users
 
