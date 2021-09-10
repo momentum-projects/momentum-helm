@@ -1,7 +1,7 @@
 <ul>
   <li *ngFor="let profile of profilesService.getProfiles()">
     {{ profile.name }}
-    <div *ngIf="isCurrentUser(profile.id)">
+    <span *ngIf="!isCurrentUser(profile.id)">
       <button
         *ngIf="!isConnected(profile.id)"
         (click)="
@@ -11,13 +11,13 @@
         Connect
       </button>
       <button
-        *ngIf="!isConnected(profile.id)"
+        *ngIf="isConnected(profile.id)"
         (click)="
           profilesService.disconnect(profile.id, loginService.getCurrentUser())
         "
       >
         Disconnect
       </button>
-    </div>
+    </span>
   </li>
 </ul>
