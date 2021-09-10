@@ -13,4 +13,8 @@ export class ExperienceComponent  {
   onNewExperience() {
     this.newExperienceEvent.emit(this.newExperience);
   }
+
+  get experience() {
+    this.profilesService(this.profile).
+  }
 }

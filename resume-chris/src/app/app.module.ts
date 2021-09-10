@@ -20,6 +20,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { ProfilesService } from './profiles.service';
+import { GraphQLModule } from './graphql.module';
 
 registerLocaleData(en);
 
@@ -43,8 +45,9 @@ registerLocaleData(en);
     NzButtonModule,
     NzInputModule,
     NzMenuModule,
+    GraphQLModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, ProfilesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
