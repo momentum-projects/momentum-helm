@@ -30,10 +30,21 @@
 1. Nested Routes - `children`
    - `router-outlet`
 1. Guards
+   - `ng generate guard auth`
    - `canActivate`
    - `canActivateChild`
 1. Data
    - passing static data to a route
+
+## Modules
+
+1. How to split up your application
+2. Loading Modules with Routes
+3. Packing the chunks?
+
+## RxJS
+
+
 
 ## Services
 
