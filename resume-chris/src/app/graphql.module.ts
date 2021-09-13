@@ -5,7 +5,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
 import { environment } from 'src/environments/environment';
 
-const uri = 'https://api.github.com/graphql'; // <-- add the URL of the GraphQL server here
+const uri = 'https://api.github.com/graphql';
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
     link: authLink.concat(httpLink.create({ uri })),

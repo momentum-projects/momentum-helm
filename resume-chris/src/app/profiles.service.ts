@@ -6,7 +6,7 @@ export default class Profile {
     public firstName: string,
     public lastName: string,
     public title: string,
-    public experience: string[] = [],
+    public experience: string[],
     public connections: number[] = []
   ) {}
 
@@ -15,67 +15,62 @@ export default class Profile {
   }
 }
 
-const PROFILE_KEY = 'profiles';
+const PROFILES_KEY = 'profiles';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfilesService {
-  private profiles: Profile[] = [
-    new Profile(0, 'Chris', 'Athanas', 'Mr.', [
-      'Android Developer 2020',
-      'Thai Mat Bodyworker',
-    ]),
-    new Profile(1, 'Alan', 'Cox', 'Mr.', [
-      'Developer 2020',
-      'Angular instructor',
-    ]),
-    new Profile(2, 'Dee', 'Meyers', 'Ms.', ['Student 2020', 'Devloper 2021']),
-  ];
+  profiles: Profile[] = [];
 
-  constructor() {
-    // if localStorage profiles are empty, populate them with our default data
-    if (window.localStorage.getItem(PROFILE_KEY) == null) {
-      this.saveProfilesToLocalStorage();
-    }
-    this.loadProfilesFromLocalStorage();
+  get defaultProfiles() {
+    return [
+      new Profile(1, 'David', 'Rasch', 'Mr.', [
+        'Developer 2020',
+        'Angular Instructor 2021',
+      ]),
+      new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
+      new Profile(3, 'Dee', 'Meyers', 'Ms.', [
+        'Student 2020',
+        'Developer 2021',
+      ]),
+    ];
   }
+  decodeProfile(json: Profile): Profile {
+    let profile = Object.create(Profile.prototype);
+    return Object.assign(profile, json);
+  }
+  constructor() {
+    this.load();
+  }
+  load() {
+    this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
+      (obj: Profile) => this.decodeProfile(obj)
+    );
 
+    if (this.profiles.length == 0) {
+      this.profiles = this.defaultProfiles;
+    }
+  }
+  save() {
+    localStorage.setItem(PROFILES_KEY, JSON.stringify(this.profiles));
+  }
   getProfiles() {
     return this.profiles;
   }
   addProfile(profile: Profile) {
     this.profiles.push(profile);
-    this.saveProfilesToLocalStorage();
   }
-  getProfile(index: number): Profile | null | undefined {
+  getProfile(index: number) {
     return this.profiles.find((profile) => profile.id == index);
-  }
-  saveProfilesToLocalStorage() {
-    window.localStorage.setItem(PROFILE_KEY, JSON.stringify(this.profiles));
-  }
-  loadProfilesFromLocalStorage() {
-    this.profiles = JSON.parse(
-      window.localStorage.getItem(PROFILE_KEY) || '[]'
-    ).map(
-      (obj: any) =>
-        new Profile(
-          obj.id,
-          obj.firstName,
-          obj.lastName,
-          obj.title,
-          obj.experience,
-          obj.connections
-        )
-    );
   }
   addExperience(index: number, experience: string) {
     const profile = this.getProfile(index);
 
     if (profile) {
-      profile.experience.push(experience);
-      this.saveProfilesToLocalStorage();
-      return;
+      const exp = profile.experience.push(experience);
+      this.save();
+      return exp;
     } else {
       throw 'Profile does not exist';
     }
@@ -93,7 +88,7 @@ export class ProfilesService {
     if (!secondProfile.connections.find((num) => num == first)) {
       secondProfile.connections.push(first);
     }
-    this.saveProfilesToLocalStorage();
+    this.save();
   }
   disconnect(first: number, second: number) {
     const firstProfile = this.getProfile(first);
@@ -112,7 +107,7 @@ export class ProfilesService {
     if (found >= 0) {
       secondProfile.connections.splice(found, 1);
     }
-    this.saveProfilesToLocalStorage();
+    this.save();
   }
   isConnected(first: number, second: number) {
     const firstProfile = this.getProfile(first);
@@ -125,7 +120,3 @@ export class ProfilesService {
     return firstProfile.connections.find((num) => num == second);
   }
 }
-function obj(obj: any, arg1: (Profile: any) => Profile): Profile[] {
-  throw new Error('Function not implemented.');
-}
-

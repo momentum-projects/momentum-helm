@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { LoginService } from './login.service';
 import { ProfilesService } from './profiles.service';
+
+type PageName = 'profile' | 'connections';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +10,20 @@ import { ProfilesService } from './profiles.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public profilesService: ProfilesService) {}
+  title = 'linkme-david';
 
-  title = 'linkme-chris';
+  pageSelected: PageName = 'profile';
+
+  constructor(
+    public profilesService: ProfilesService,
+    public loginService: LoginService
+  ) {}
+
+  get pageName() {
+    return this.pageSelected;
+  }
+
+  changePage(name: PageName) {
+    this.pageSelected = name;
+  }
 }
