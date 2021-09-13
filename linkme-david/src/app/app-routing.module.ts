@@ -23,6 +23,11 @@ const routes: Routes = [
     path: 'connections',
     component: ConnectionsComponent,
   },
+  {
+    path: '',
+    redirectTo: '/connections',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
