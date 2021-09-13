@@ -22,17 +22,17 @@
 | Day 3  | Morning | [Angular Lifecycle and Nesting Components](angular2.md) |
 | Day 3  | Afternoon | [Services](angular2.md) |
 | Day 4  | Morning | [GraphQL and External Data](graphql.md) |
-| Day 4  | Afternoon | [Models, Routing, & Modules](angular3.md) |
+| Day 4  | Afternoon | Refactoring |
 
 ## Week 2
 
 | Day | AM/PM | Subjects|
 | --- | --- |--- |
-| Day 5 | Morning | [Modules] |
-| Day 5 | Afternoon | [External Libraries] |
-| Day 6 | Morning | [RxJS] |
-| Day 6 | Afternoon | [Docker, Postgres, and Express Intro] |
-| Day 7 | Morning | [Routing] |
+| Day 5 | Morning | [Routing, Modules](angular3.md) |
+| Day 5 | Afternoon | [Routing, Modules](angular3.md) |
+| Day 6 | Morning | [Docker, Postgres, Intro to Express] |
+| Day 6 | Afternoon | [Setting up ORM and Data Model] |
+| Day 7 | Morning | [Authentication] |
 | Day 7 | Afternoon | [Database Models] |
 | Day 8 | Morning | [GraphQL] |
 | Day 8 | Afternoon | [GraphQL Continued] |

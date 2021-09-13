@@ -30,10 +30,24 @@
 1. Nested Routes - `children`
    - `router-outlet`
 1. Guards
+   - `ng generate guard auth`
    - `canActivate`
    - `canActivateChild`
 1. Data
    - passing static data to a route
+
+## Exercise - Guard your Routes
+
+1. Add a redirect (using the Angular Router, no plain-javascript tricks allowed) so that when people go to your application without any url it redirects them to the `/connections` page.
+2. Add a 404 route and Component to display a helpful message to your users when they mis-type a URL
+3. Add a [Guard](https://angular.io/guide/router#preventing-unauthorized-access) that only allows you into the `/profiles` and `/connections` routes (and their children) if you're logged in.
+   - will require a few more routes and components for login/logout
+
+## Modules
+
+1. How to split up your application
+2. Loading Modules with Routes
+3. Packing the chunks?
 
 ## Services
 

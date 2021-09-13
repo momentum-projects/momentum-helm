@@ -1,11 +1,4 @@
-import {
-  ElementRef,
-  Component,
-  ContentChild,
-  Input,
-  OnInit,
-  AfterContentInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { ProfilesService } from '../profiles.service';
 
@@ -14,10 +7,9 @@ import { ProfilesService } from '../profiles.service';
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss'],
 })
-export class ExperienceComponent implements OnInit, AfterContentInit {
+export class ExperienceComponent implements OnInit {
   @Input() profile!: number;
-
-  @ContentChild('morestuff') morestuff!: ElementRef;
+  @Input() editable!: boolean;
 
   newExperience: string = '';
   repositories: Repository[] = [];
@@ -30,11 +22,6 @@ export class ExperienceComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.loadRepositories();
-  }
-
-  ngAfterContentInit() {
-    console.log(' ng after content init');
-    console.log(this.morestuff);
   }
 
   get experience() {
