@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'connections',
-    component: ConnectionsComponent, // this is the component with the <router-outlet> in the template
+    component: ConnectionsComponent,
   },
 ];
 
