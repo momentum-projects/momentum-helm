@@ -1,11 +1,13 @@
-<router-outlet></router-outlet>
-
 <nz-layout>
   <nz-header>
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li (click)="changePage('profile')" nz-menu-item>Profiles</li>
-      <li (click)="changePage('connections')" nz-menu-item>Connections</li>
+      <li nz-menu-item>
+        <a routerLink="/profiles">Profiles</a>
+      </li>
+      <li nz-menu-item>
+        <a routerLink="/connections">Connections</a>
+      </li>
     </ul>
   </nz-header>
   <nz-content>
@@ -31,15 +33,12 @@
         {{ loginService.getCurrentProfile().name }}
       </nz-breadcrumb-item>
       <nz-breadcrumb-item>
-        {{ this.pageName | titlecase }}
+        {{ "LinkMe" }}
       </nz-breadcrumb-item>
     </nz-breadcrumb>
     <div class="inner-content">
-      <app-profiles *ngIf="this.pageSelected == 'profile'"></app-profiles>
-      <app-connections
-        *ngIf="this.pageSelected == 'connections'"
-      ></app-connections>
+      <router-outlet></router-outlet>
     </div>
   </nz-content>
-  <nz-footer>Designed by Helm and Momoentum Crew</nz-footer>
+  <nz-footer>Designed by Helm and Momentum Crew</nz-footer>
 </nz-layout>
