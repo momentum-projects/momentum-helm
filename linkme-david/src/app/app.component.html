@@ -1,24 +1,44 @@
-<router-outlet></router-outlet>
-
 <nz-layout>
   <nz-header>
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item>nav 1</li>
-      <li nz-menu-item>nav 2</li>
-      <li nz-menu-item>nav 3</li>
+      <li nz-menu-item>
+        <a routerLink="/profiles">Profiles</a>
+      </li>
+      <li nz-menu-item>
+        <a routerLink="/connections">Connections</a>
+      </li>
     </ul>
   </nz-header>
   <nz-content>
+    <div>
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        {{ loginService.getCurrentProfile().name }}
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li
+            *ngFor="let profile of profilesService.getProfiles()"
+            (click)="loginService.setCurrentUser(profile.id)"
+            nz-menu-item
+          >
+            {{ profile.name }} ({{ profile.id }} )
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
     <nz-breadcrumb>
-      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-      <nz-breadcrumb-item>List</nz-breadcrumb-item>
-      <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        {{ loginService.getCurrentProfile().name }}
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        {{ "LinkMe" }}
+      </nz-breadcrumb-item>
     </nz-breadcrumb>
     <div class="inner-content">
-      <app-profile [profile]="1" name="Profile Editing Page"></app-profile>
-      <app-connections></app-connections>
+      <router-outlet></router-outlet>
     </div>
   </nz-content>
-  <nz-footer>Designed by Helm and Momoentum Crew</nz-footer>
+  <nz-footer>Designed by Helm and Momentum Crew</nz-footer>
 </nz-layout>
