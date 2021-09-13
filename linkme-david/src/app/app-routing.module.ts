@@ -10,13 +10,13 @@ const routes: Routes = [
     component: ProfilesComponent, // this is the component with the <router-outlet> in the template
     children: [
       {
-        path: 'one', // child route path matches url like http://localhost:4200/profiles/one?id=4 (via queryParams)
-        component: ProfileComponent, // child route component that the router renders
-      },
-      {
         path: ':id', // child route path matches url like http://localhost:4200/profiles/4 (via params)
         component: ProfileComponent, // child route component that the router renders
       },
+      // {
+      //   path: 'single', // child route path matches url like http://localhost:4200/profiles/single?id=4 (via queryParams)
+      //   component: ProfileComponent, // child route component that the router renders
+      // },
     ],
   },
   {
