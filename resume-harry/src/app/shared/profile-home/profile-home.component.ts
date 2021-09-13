@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile, ProfileService } from '../services/profile.service';
 import { AuthService } from '../services/auth.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-profile-home',
@@ -13,21 +14,22 @@ export class ProfileHomeComponent implements OnInit {
 
   constructor(
     public profileService: ProfileService,
+    public loginService: LoginService,
     public auth: AuthService
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.profiles = this.allProfileData;
   }
 
+  ngOnInit() {}
+
   get allProfileData() {
-    return this.profileService.profiles;
+    return this.profileService
+      .getProfiles()
+      .filter((profile) => profile.id !== this.loginService.getCurrentUser());
   }
 
   logout() {
-    this.profileService.accountLogout(
-      this.profileService.getCurrentUserLoggedIn()
-    );
+    this.loginService.logout(this.loginService.getCurrentUser());
     this.auth.logout();
   }
 }

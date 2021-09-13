@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ProfileService } from './profile.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(
-    public profileService: ProfileService,
+    public loginService: LoginService,
     private http: HttpClient,
     private router: Router
   ) {}
@@ -18,7 +18,7 @@ export class AuthService {
   redirectUrl: string | null = null;
 
   login(): void {
-    this.isLoggedIn = Boolean(this.profileService.getCurrentUserLoggedIn());
+    this.isLoggedIn = Boolean(this.loginService.getCurrentUser());
     this.router.navigate(['/home']).then((r) => r);
   }
 

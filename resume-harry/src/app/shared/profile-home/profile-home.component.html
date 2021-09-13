@@ -1,8 +1,16 @@
 <h1 nz-typography>Profile Editing Page</h1>
 <button nz-button (click)="logout()">Log Out</button>
-<div *ngFor="let profile of allProfileData">
-  <div *ngIf="!profile.isActive; then thenBlock"></div>
-  <ng-template #thenBlock>
-    <app-profile [profile]="profile.id"></app-profile>
-  </ng-template>
+<div nz-row nzJustify="start">
+  <div nz-col nzSpan="5" class="gutter-row">
+    <ul nz-menu nzMode="inline">
+      <li *ngFor="let profile of profiles" nz-menu-item>
+        <a [routerLink]="['/home', profile.id]">
+          {{ profile.firstName }} {{ profile.lastName }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div nz-col nzSpan="19" class="gutter-row">
+    <router-outlet></router-outlet>
+  </div>
 </div>

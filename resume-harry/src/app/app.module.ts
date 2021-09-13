@@ -24,7 +24,7 @@ import { ConnectButtonComponent } from './shared/connect-button/connect-button.c
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { LogInComponent } from './shared/log-in/log-in.component';
+import { LoginComponent } from './shared/login/login.component';
 import { ProfileService } from './shared/services/profile.service';
 import { GraphQLModule } from './graphql.module';
 import { ProfileHomeComponent } from './shared/profile-home/profile-home.component';
@@ -37,7 +37,7 @@ registerLocaleData(en);
     ProfileComponent,
     ExperienceComponent,
     ConnectButtonComponent,
-    LogInComponent,
+    LoginComponent,
     ProfileHomeComponent,
   ],
   imports: [

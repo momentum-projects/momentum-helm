@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-connect-button',
@@ -10,7 +11,10 @@ export class ConnectButtonComponent {
   @Input() profileId!: number;
   @Input() profile!: number;
 
-  constructor(public profileService: ProfileService) {}
+  constructor(
+    public profileService: ProfileService,
+    public loginService: LoginService
+  ) {}
 
   alterConnection() {
     if (
@@ -35,8 +39,8 @@ export class ConnectButtonComponent {
   }
 
   get currentActiveUser() {
-    return this.profileService.getCurrentUserLoggedIn()
-      ? this.profileService.getCurrentUserLoggedIn()
+    return this.loginService.getCurrentUser()
+      ? this.loginService.getCurrentUser()
       : false;
   }
 

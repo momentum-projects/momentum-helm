@@ -12,50 +12,67 @@ export class Profile {
   ) {}
 }
 
+const PROFILES_KEY = 'profiles';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  profiles = [
-    new Profile(
-      0,
-      'Harry',
-      'Stephens',
-      'Mr.',
-      ['Product Designer 2020', 'Developer 2021'],
-      [],
-      false
-    ),
-    new Profile(
-      1,
-      'David',
-      'Rasch',
-      'Mr.',
-      ['Developer 2020', 'Angular Instructor 2021'],
-      [],
-      false
-    ),
-    new Profile(
-      2,
-      'Alan',
-      'Cox',
-      'Mr.',
-      ['CFO 2017-2018', 'CEO 2018-2019', 'CTO 2020-2021'],
-      [],
-      false
-    ),
-    new Profile(
-      3,
-      'Dee',
-      'Meyers',
-      'Ms.',
-      ['Student 2019', 'Student 2020', 'Developer 2021'],
-      [],
-      false
-    ),
-  ];
+  profiles: Profile[] = [];
 
-  constructor() {}
+  get defaultProfiles() {
+    return [
+      new Profile(
+        0,
+        'Harry',
+        'Stephens',
+        'Mr.',
+        ['Product Designer 2020', 'Developer 2021'],
+        [],
+        false
+      ),
+      new Profile(
+        1,
+        'David',
+        'Rasch',
+        'Mr.',
+        ['Developer 2020', 'Angular Instructor 2021'],
+        [],
+        false
+      ),
+      new Profile(
+        2,
+        'Alan',
+        'Cox',
+        'Mr.',
+        ['CFO 2017-2018', 'CEO 2018-2019', 'CTO 2020-2021'],
+        [],
+        false
+      ),
+      new Profile(
+        3,
+        'Dee',
+        'Meyers',
+        'Ms.',
+        ['Student 2019', 'Student 2020', 'Developer 2021'],
+        [],
+        false
+      ),
+    ];
+  }
+
+  decodeProfile(json: Profile): Profile {
+    let profile = Object.create(Profile.prototype);
+    return Object.assign(profile, json);
+  }
+
+  constructor() {
+    this.load();
+  }
+
+  getProfiles() {
+    return this.profiles;
+  }
 
   addProfile(profile: Profile) {
     this.profiles.push(profile);
@@ -66,42 +83,21 @@ export class ProfileService {
   }
 
   save() {
-    const jsonData = JSON.stringify(this.profiles);
-    localStorage.setItem('profileData', jsonData);
+    localStorage.setItem(PROFILES_KEY, JSON.stringify(this.profiles));
   }
 
   load() {
-    return JSON.parse(<string>localStorage.getItem('profileData'));
+    this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
+      (obj: Profile) => this.decodeProfile(obj)
+    );
+
+    if (this.profiles.length == 0) {
+      this.profiles = this.defaultProfiles;
+    }
   }
 
   clear() {
     localStorage.clear();
-  }
-
-  authorizeLogin(index: number): boolean {
-    const profile = this.getProfile(index);
-    if (profile) {
-      profile.isActive = true;
-      return true;
-    } else {
-      throw 'Profile does not exist';
-    }
-  }
-
-  accountLogout(index: number | undefined) {
-    if (index) {
-      const profile = this.getProfile(index);
-      if (profile) {
-        profile.isActive = false;
-        this.save();
-      }
-    } else {
-      new Error('Profile does not exist');
-    }
-  }
-
-  getCurrentUserLoggedIn() {
-    return this.profiles.find((profile: Profile) => profile.isActive)?.id;
   }
 
   addExperience(index: number, experience: string) {

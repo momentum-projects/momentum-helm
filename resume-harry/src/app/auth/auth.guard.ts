@@ -7,12 +7,17 @@ import {
   UrlTree,
 } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import { LoginService } from '../shared/services/login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    public loginService: LoginService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,7 +28,8 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): true | UrlTree {
-    if (this.authService.isLoggedIn) {
+    if (this.loginService.currentUser !== undefined) {
+      this.authService.isLoggedIn = true;
       return true;
     }
 
