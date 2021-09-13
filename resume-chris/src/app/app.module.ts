@@ -26,6 +26,8 @@ import { GraphQLModule } from './graphql.module';
 import { ConnectionsComponent } from './connections/connections.component';
 import { LoginService } from './login.service';
 import { ProfilesComponent } from './profile/profiles.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 registerLocaleData(en);
 
@@ -36,6 +38,7 @@ registerLocaleData(en);
     ExperienceComponent,
     ConnectionsComponent,
     ProfilesComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
