@@ -44,6 +44,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Ignoring secrets file
-./src/environments/secrets.ts
