@@ -34,6 +34,20 @@ app.listen(port, () => {
 })
 ```
 
+Serving static files
+
+`app.use(express.static('public'))`
+
+Serving our frontend:
+
+```javascript
+// handle every other route with index.html, which will contain
+// a script tag to your application's JavaScript file(s).
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(`${__dirname}/'index.html'`));
+});
+```
+
 ## Setup (using TypeORM to generate our project)
 
 typeorm init --name linkback-david --database postgres --express
