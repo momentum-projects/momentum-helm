@@ -47,10 +47,17 @@
 
 1. How to split up your application
 2. Loading Modules with Routes
-3. Packing the chunks?
+3. Packing the chunks? - `ng build --optimize` then you can run a mini webserver (in the `dist/resume-david` directory with `python -m http.server`
 
-## Services
+## Resources
 
-1. Shared data
-2. Event Binding
-3. Dependency Injection
+1. [Lazy-Loading Angular Components and Code through Modules](https://angular.io/guide/lazy-loading-ngmodules)
+1. [One-liners to launch a static webserver](https://gist.github.com/henriquemenezes/cb8528078d1229ed7837)
+1. [Angular Router](https://angular.io/guide/router)
+
+## Architecture Diagram
+
+![architecture diagram showing nesting of components and the services](architecture.png)
+
+
+

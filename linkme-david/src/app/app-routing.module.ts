@@ -28,6 +28,11 @@ const routes: Routes = [
     redirectTo: '/connections',
     pathMatch: 'full',
   },
+  {
+    path: 'reporting',
+    loadChildren: () =>
+      import('./reporting/reporting.module').then((m) => m.ReportingModule),
+  },
 ];
 
 @NgModule({
