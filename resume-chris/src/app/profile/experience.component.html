@@ -1,23 +1,37 @@
 <div>
   <h2>Experience</h2>
   <div *ngIf="editable">
-    <nz-input-group nzCompact>
-      <input
-        #myLocalRef
-        nz-input
-        placeholder="your experience"
-        [(ngModel)]="newExperience"
-        type="text"
-      />
-      <button
-        [disabled]="!newExperience"
-        nz-button
-        nzType="primary"
-        (click)="onNewExperience()"
-      >
-        Add new
-      </button>
-    </nz-input-group>
+    <form (ngSubmit)="onSubmit(experienceForm)" #experienceForm="ngForm">
+      <nz-input-group nzCompact>
+        <input
+          #experience="ngModel"
+          nz-input
+          name="experience"
+          placeholder="your experience"
+          required
+          minlength="4"
+          [(ngModel)]="newExperience"
+          type="text"
+        />
+        <div
+          *ngIf="
+            experienceForm.form.controls.experience.invalid &&
+            (experience.dirty || experience.touched)
+          "
+          style="background-color: red"
+        >
+          You need to enter your experience.
+        </div>
+        <button
+          [disabled]="experienceForm.invalid"
+          nz-button
+          nzType="primary"
+          (click)="onNewExperience()"
+        >
+          Add new
+        </button>
+      </nz-input-group>
+    </form>
   </div>
   <ul>
     <li *ngFor="let experienceLine of experience">
@@ -32,3 +46,5 @@
     </li>
   </ul>
 </div>
+
+<!-- [disabled]="!newExperience" -->

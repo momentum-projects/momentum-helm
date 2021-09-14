@@ -16,7 +16,9 @@ export class ProfileComponent implements OnInit {
   constructor(
     public profilesService: ProfilesService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.editable = true;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {

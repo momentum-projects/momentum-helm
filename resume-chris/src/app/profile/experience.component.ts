@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { ProfilesService } from '../profiles.service';
 
@@ -22,6 +23,10 @@ export class ExperienceComponent implements OnInit {
 
   ngOnInit() {
     this.loadRepositories();
+  }
+
+  onSubmit(experienceForm: NgForm) {
+    console.log({ experienceForm });
   }
 
   get experience() {
