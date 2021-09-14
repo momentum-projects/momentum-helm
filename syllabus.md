@@ -31,7 +31,7 @@
 | Day 5 | Morning | [Routing, Modules](angular3.md) |
 | Day 5 | Afternoon | [Routing, Modules](angular3.md) |
 | Day 6 | Morning | [Docker, Postgres](docker.md) |
-| Day 6 | Afternoon | [Intro to Express](express.md) 
+| Day 6 | Afternoon | [Intro to Express](express.md) |
 | Day 7 | Morning | [Setting up ORM and Data Model] |
 | Day 7 | Afternoon | [Authentication & CORS] |
 | Day 8 | Morning | [GraphQL] |
