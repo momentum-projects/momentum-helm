@@ -1,5 +1,9 @@
 # Express
 
+## Prisma
+
+This afternoon we worked to set up a project with Prisma. We mostly followed this [example](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-typescript-postgres/)
+
 ## Web serving intro
 
 run `npm build --optimize` in your __Angular__ project directory. Then `cd dist/<projectname>`. From there, run `python3 -m http.server` (if that doesn't work, try removing the `3` from python and trying again)
@@ -50,4 +54,4 @@ app.get('*', function (request, response) {
 
 ## Setup (using TypeORM to generate our project)
 
-typeorm init --name linkback-david --database postgres --express
+`typeorm init --name linkback-david --database postgres --express`
