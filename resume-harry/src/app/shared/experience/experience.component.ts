@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ProfileService } from '../services/profile.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-experience',
@@ -27,8 +28,15 @@ export class ExperienceComponent {
     return this.profileService.getProfile(this.profile)?.experience;
   }
 
-  onNewExperience() {
+  onSubmit(experienceForm: NgForm) {
+    console.log(experienceForm);
     this.profileService.addExperience(this.profile, this.newExperience);
+    this.newExperience = '';
+  }
+
+  get currentUserProfile() {
+    let currentUserId = localStorage.getItem('USER') || '';
+    return this.profileService.getProfile(parseInt(currentUserId.toString()));
   }
 
   loadRepositories() {

@@ -28,6 +28,10 @@ export class ProfileHomeComponent implements OnInit {
       .filter((profile) => profile.id !== this.loginService.getCurrentUser());
   }
 
+  get currentUser() {
+    return this.loginService.getCurrentProfile()?.id;
+  }
+
   logout() {
     this.loginService.logout(this.loginService.getCurrentUser());
     this.auth.logout();

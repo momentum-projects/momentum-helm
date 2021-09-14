@@ -34,9 +34,7 @@ export class LoginService {
     if (index) {
       this.currentUser = undefined;
       localStorage.setItem('USER', 'undefined');
-      const profile = this.profileService.getProfile(index);
-      if (profile) {
-        profile.isActive = false;
+      if (this.profileService.getProfile(index)) {
         this.profileService.save();
       }
     } else {

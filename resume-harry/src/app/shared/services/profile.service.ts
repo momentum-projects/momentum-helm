@@ -7,12 +7,9 @@ export class Profile {
     public lastName: string,
     public title: string,
     public experience: string[],
-    public connections: number[],
-    public isActive: boolean
+    public connections: number[]
   ) {}
 }
-
-const PROFILES_KEY = 'profiles';
 
 @Injectable({
   providedIn: 'root',
@@ -23,51 +20,47 @@ export class ProfileService {
   get defaultProfiles() {
     return [
       new Profile(
-        0,
+        1,
         'Harry',
         'Stephens',
         'Mr.',
         ['Product Designer 2020', 'Developer 2021'],
-        [],
-        false
+        []
       ),
       new Profile(
-        1,
+        2,
         'David',
         'Rasch',
         'Mr.',
         ['Developer 2020', 'Angular Instructor 2021'],
-        [],
-        false
+        []
       ),
       new Profile(
-        2,
+        3,
         'Alan',
         'Cox',
         'Mr.',
         ['CFO 2017-2018', 'CEO 2018-2019', 'CTO 2020-2021'],
-        [],
-        false
+        []
       ),
       new Profile(
-        3,
+        4,
         'Dee',
         'Meyers',
         'Ms.',
         ['Student 2019', 'Student 2020', 'Developer 2021'],
-        [],
-        false
+        []
       ),
     ];
+  }
+
+  constructor() {
+    this.load();
   }
 
   decodeProfile(json: Profile): Profile {
     let profile = Object.create(Profile.prototype);
     return Object.assign(profile, json);
-  }
-
-  constructor() {
-    this.load();
   }
 
   getProfiles() {
@@ -83,11 +76,11 @@ export class ProfileService {
   }
 
   save() {
-    localStorage.setItem(PROFILES_KEY, JSON.stringify(this.profiles));
+    localStorage.setItem('profiles', JSON.stringify(this.profiles));
   }
 
   load() {
-    this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
+    this.profiles = JSON.parse(localStorage.getItem('profiles') || '[]').map(
       (obj: Profile) => this.decodeProfile(obj)
     );
 

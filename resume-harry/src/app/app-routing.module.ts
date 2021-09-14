@@ -8,7 +8,7 @@ import { ProfileComponent } from './shared/profile/profile.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
-    path: 'home',
+    path: 'profiles',
     component: ProfileHomeComponent,
     canActivate: [AuthGuard],
     children: [

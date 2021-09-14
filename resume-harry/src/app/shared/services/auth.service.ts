@@ -19,7 +19,7 @@ export class AuthService {
 
   login(): void {
     this.isLoggedIn = Boolean(this.loginService.getCurrentUser());
-    this.router.navigate(['/home']).then((r) => r);
+    this.router.navigate(['/profiles']).then((r) => r);
   }
 
   logout(): void {
