@@ -17,4 +17,3 @@
 1. `docker-compose`
 1. Running Postgres via `docker-compose`
 1. Using `psql` via the console
-
