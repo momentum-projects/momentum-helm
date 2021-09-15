@@ -6,34 +6,29 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 const prisma = new PrismaClient();
 
 const typeDefs = `
-
-  type User {
-
-    email: String!
-
-    name: String
-
+  type Profile {
+    id: Int!
+    experience: [String]
+    firstName: String
+    lastName: String
+    title: String
   }
 
   type Query {
-
-    allUsers: [User!]!
-
+    allProfiles: [Profile!]!
   }
-
 `;
 
 const resolvers = {
   Query: {
-    allUsers: () => {
-      return prisma.user.findMany();
+    allProfiles: () => {
+      return prisma.profile.findMany();
     },
   },
 };
 
 export const schema = makeExecutableSchema({
   resolvers,
-
   typeDefs,
 });
 
