@@ -13,20 +13,15 @@ model Profile {
   firstName            String
   lastName             String
   title                String
-  connections ProfileConnections[]
-}
-
-model ProfileConnections {
-  id Int @id @default(autoincrement())
-  profile Profile? @relation(fields: [profileId], references: [id])
-  connection Connection? @relation(fields: [connectionId], references: [id])
-  profileId Int?
-  connectionId Int?
+  connections                 Connection[] @relation("connectedFrom")
+  incomingConnections         Connection[] @relation("connectedTo")
 }
 
 model Connection {
-  id          Int     @id @default(autoincrement())
-  outboundId  Int?
-  inboundId   Int?
-  connections ProfileConnections[]
+  connectedFrom Profile @relation("connectedFrom", fields: [connectedFromId], references: [id])
+  connectedFromId Int
+  connectedTo   Profile @relation("connectedTo", fields: [connectedToId], references: [id])
+  connectedToId Int
+
+  @@id([connectedFromId, connectedToId])
 }

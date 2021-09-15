@@ -34,16 +34,16 @@ async function main() {
         experience: ["Yogurt Chef"]
     }});
     await prisma.connection.create({ data: {
-        leftSideId: 1,
-        rightSideId: 2,
+        connectedFromId: 1,
+        connectedToId: 2,
     }});
     await prisma.connection.create({ data: {
-        leftSideId: 2,
-        rightSideId: 3,
+        connectedFromId: 2,
+        connectedToId: 3,
     }});
     await prisma.connection.create({ data: {
-        leftSideId: 1,
-        rightSideId: 4,
+        connectedFromId: 1,
+        connectedToId: 4,
     }});
 }
 
