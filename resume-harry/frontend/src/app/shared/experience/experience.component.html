@@ -1,0 +1,53 @@
+<span nz-typography>
+  <div nz-row nzJustify="start" nzAlign="bottom">
+    <div nz-col nzFlex="auto">
+      <h6 nz-typography nzType="secondary">Experience</h6>
+      <li>
+        <ul>
+          <h5 nz-typography *ngFor="let experienceLine of experience">
+            {{ experienceLine }}
+          </h5>
+        </ul>
+      </li>
+    </div>
+  </div>
+  <div *ngIf="profile === currentUserProfile?.id; then thenBlock"></div>
+  <ng-template #thenBlock>
+    <form
+      #experienceForm="ngForm"
+      (ngSubmit)="onSubmit(experienceForm)"
+      novalidate
+    >
+      <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
+        <div nz-col nzSpan="16">
+          <input
+            #experience="ngModel"
+            name="experience"
+            type="text"
+            nz-input
+            placeholder="Your Experience"
+            nzSize="large"
+            minlength="4"
+            [(ngModel)]="newExperience"
+          />
+        </div>
+        <div nz-col>
+          <button nz-button nzSize="large">Add New Experience</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <br />
+  <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
+    <div nz-col nzFlex="auto">
+      <h6 nz-typography nzType="secondary">GitHub Repositories</h6>
+      <li>
+        <ul>
+          <h5 nz-typography *ngFor="let repository of repositories">
+            <a [href]="repository.url">{{ repository.name }}</a>
+          </h5>
+        </ul>
+      </li>
+    </div>
+  </div>
+</span>

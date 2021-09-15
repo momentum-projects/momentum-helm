@@ -1,0 +1,38 @@
+<div
+  nz-row
+  nzAlign="middle"
+  nzJustify="space-between"
+  style="margin-bottom: 24px"
+>
+  <div nz-col nzFlex="auto">
+    <h1 nz-typography>Profile Editing Page</h1>
+  </div>
+  <div nz-col>
+    <button nz-button (click)="logout()" nzDanger>Log Out</button>
+  </div>
+</div>
+<div nz-row nzJustify="start">
+  <div nz-col nzSpan="5" class="gutter-row">
+    <ul nz-menu nzMode="inline">
+      <li nz-menu-group nzTitle="Profiles">
+        <ul>
+          <li *ngFor="let profile of profiles" nz-menu-item>
+            <a [routerLink]="['/profiles', profile.id]">
+              {{ profile.firstName }} {{ profile.lastName }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li nz-menu-group nzTitle="Account">
+        <ul>
+          <li nz-menu-item>
+            <a [routerLink]="['/profiles', currentUser]"> My Profile </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div nz-col nzSpan="19" class="gutter-row">
+    <router-outlet></router-outlet>
+  </div>
+</div>

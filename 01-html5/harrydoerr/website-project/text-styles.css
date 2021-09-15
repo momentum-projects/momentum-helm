@@ -1,0 +1,53 @@
+@import url("rainbow-animation.css");
+
+.title-text-style {
+  font-size: 3rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display";
+  font-weight: 900;
+  font-style: italic;
+  margin-block-end: 15px;
+  -webkit-animation: rainbow 8s infinite;
+  -ms-animation: rainbow 8s infinite;
+  animation: rainbow 8s infinite;
+}
+
+p,
+ul,
+li,
+ol {
+  font-family: "Open Sans";
+}
+
+a, a:hover {
+text-decoration: none;
+color: rainbow;
+color: var(--rainbow);
+-webkit-animation: rainbow 8s infinite;
+animation: rainbow 8s infinite;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.post-title-text-style {
+    margin-block-end: 0%;
+    margin-block-start: 0%;
+}
+
+.post-body-text-style {
+    font-size: 1rem;
+}
+
+.post-caption-text-style {
+    color: grey;
+    font-size: 0.85rem;
+}

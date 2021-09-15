@@ -1,0 +1,30 @@
+<section class="game-container">
+  <section *ngIf="playerTurn === 0; then thenBlock; else elseBlock"></section>
+  <ng-template #thenBlock>
+    <h1>Get ready for some Tic-Tac-Toe!</h1>
+  </ng-template>
+  <ng-template #elseBlock>
+    <section *ngIf="gameOver; then thenBlock; else elseBlock"></section>
+    <ng-template #thenBlock>
+      <h1>Game Over! Player {{ winningPlayer }} wins!</h1>
+    </ng-template>
+    <ng-template #elseBlock>
+      <h1>Player {{ playerTurn }}, you're up!</h1>
+    </ng-template>
+  </ng-template>
+  <section class="square-container">
+    <section *ngFor="let item of gameData" [id]="item.id">
+      <app-tic-tac-toe-square
+        [squareClickable]="gameGridClickable"
+        [gameData]="item"
+        (squareClicked)="updateGameData($event)"
+        [playerTurn]="playerTurn"
+      ></app-tic-tac-toe-square>
+    </section>
+  </section>
+  <section>
+    <button [disabled]="startButtonDisabled" (click)="startGame()">
+      Start Game
+    </button>
+  </section>
+</section>
