@@ -1,41 +1,49 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
+import express from "express";
+import { graphqlHTTP } from "express-graphql";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-async function main() {
-  await prisma.user.create({
-    data: {
-      name: 'Chris',
-      email: 'chris@prisma.io',
-      posts: {
-        create: { title: 'Hello World' },
-      },
-      profile: {
-        create: { bio: 'I like turtles' },
-      },
+const typeDefs = `
+
+  type User {
+
+    email: String!
+
+    name: String
+
+  }
+
+  type Query {
+
+    allUsers: [User!]!
+
+  }
+
+`;
+
+const resolvers = {
+  Query: {
+    allUsers: () => {
+      return prisma.user.findMany();
     },
-  })
+  },
+};
 
-  const allUsers = await prisma.user.findMany({
-    include: {
-      posts: true,
-      profile: true,
-    },
-  })
-  console.dir(allUsers, { depth: null })
-}
+export const schema = makeExecutableSchema({
+  resolvers,
 
-// async function main() {
-//   // ... you will write your Prisma Client queries here
-//   const allUsers = await prisma.user.findMany()
+  typeDefs,
+});
 
-//   console.log(allUsers)
-// }
+const app = express();
 
-main()
-  .catch((e) => {
-    throw e
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
   })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+);
+
+app.listen(4000);
