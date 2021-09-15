@@ -45,6 +45,10 @@ const typeDefs = `
   type Query {
     getConnections(profileId: Int!): [Connection]
   }
+
+  type Mutation {
+    createProfile(firstName: String, lastName: String, title: String, experience: String): Profile
+  }
 `;
 
 const resolvers = {
@@ -59,29 +63,39 @@ const resolvers = {
         },
       });
     },
-    getProfileConnections: (profileId: number) => {
-      return prisma.connection.findMany({
-        where: {
-          connections: {
-            every: {
-              profileId: { 
-                equals: 1 
-              },
-            },
-          },
-        },
-      });
-    },
-    getConnections: (profileId: number) => {
-      return prisma.connection.findMany({
-        where: {
-          inboundId: {
-            equals: 1,
-          },
-        },
-      });
-    },
+    // getProfileConnections: (profileId: number) => {
+    //   return prisma.connection.findMany({
+    //     where: {
+    //       connections: {
+    //         every: {
+    //           profileId: { 
+    //             equals: 1 
+    //           },
+    //         },
+    //       },
+    //     },
+    //   });
+    // },
+    // getConnections: (profileId: number) => {
+    //   return prisma.connection.findMany({
+    //     where: {
+    //       inboundId: {
+    //         equals: 1,
+    //       },
+    //     },
+    //   });
+    // },
   },
+  Mutation: {
+    createProfile: async (_:any, data: { firstName: string, lastName: string, title: string, experience: string }) => {
+      await prisma.profile.create({ data: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        title: data.title,
+        experience: [data.experience]
+      }});
+    }
+  }
 };
 
 export const schema = makeExecutableSchema({

@@ -8,20 +8,20 @@ datasource db {
 }
 
 model Profile {
-  id                   Int          @id @default(autoincrement())
-  experience           String[]
-  firstName            String
-  lastName             String
-  title                String
-  connections                 Connection[] @relation("connectedFrom")
-  incomingConnections         Connection[] @relation("connectedTo")
+  id                  Int          @id @default(autoincrement())
+  experience          String[]
+  firstName           String
+  lastName            String
+  title               String
+  connections         Connection[] @relation("connectedFrom")
+  incomingConnections Connection[] @relation("connectedTo")
 }
 
 model Connection {
-  connectedFrom Profile @relation("connectedFrom", fields: [connectedFromId], references: [id])
   connectedFromId Int
-  connectedTo   Profile @relation("connectedTo", fields: [connectedToId], references: [id])
-  connectedToId Int
+  connectedToId   Int
+  connectedFrom   Profile @relation("connectedFrom", fields: [connectedFromId], references: [id])
+  connectedTo     Profile @relation("connectedTo", fields: [connectedToId], references: [id])
 
   @@id([connectedFromId, connectedToId])
 }
