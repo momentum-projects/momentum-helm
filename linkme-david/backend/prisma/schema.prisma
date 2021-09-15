@@ -13,14 +13,20 @@ model Profile {
   firstName            String
   lastName             String
   title                String
-  leftSideConnections  Connection[] @relation("leftSideConnections")
-  rightSideConnections Connection[] @relation("rightSideConnections")
+  connections ProfileConnections[]
+}
+
+model ProfileConnections {
+  id Int @id @default(autoincrement())
+  profile Profile? @relation(fields: [profileId], references: [id])
+  connection Connection? @relation(fields: [connectionId], references: [id])
+  profileId Int?
+  connectionId Int?
 }
 
 model Connection {
   id          Int     @id @default(autoincrement())
-  leftSideId  Int
-  rightSideId Int
-  leftSide    Profile @relation("leftSideConnections", fields: [leftSideId], references: [id])
-  rightSide   Profile @relation("rightSideConnections", fields: [rightSideId], references: [id])
+  outboundId  Int?
+  inboundId   Int?
+  connections ProfileConnections[]
 }
