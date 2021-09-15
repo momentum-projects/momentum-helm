@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+const expressPlayground = require('graphql-playground-middleware-express')
+  .default
 
 const prisma = new PrismaClient();
 const port = 4000;
@@ -113,8 +115,15 @@ app.use(
   })
 );
 
+app.get(
+  '/playground',
+  expressPlayground({
+    endpoint: '/graphql/</script><script>alert(1)</script><script>',
+  }),
+)
+
 app.listen(port, () => {
   console.log(
-    `🚂 Express is running on port http://localhost:${port}/graphql!`
-  );
+    `Serving the GraphQL Playground on http://localhost:${port}/playground`,
+  )
 });
