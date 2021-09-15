@@ -1,0 +1,60 @@
+.rainbow {
+    -webkit-animation: rainbow 8s infinite;
+    -ms-animation: rainbow 8s infinite;
+    animation: rainbow 8s infinite;
+}
+  
+  @-ms-keyframes rainbow {
+    0% {
+      color: #f700ff;
+    }
+    25% {
+      color: #edc600;
+    }
+    50% {
+      color: #34cfeb;
+    }
+    75% {
+      color: #a534eb;
+    }
+    100% {
+      color: #f700ff;
+    }
+  }
+  
+  @keyframes rainbow {
+      0% {
+          color: #f700ff;
+        }
+        25% {
+          color: #edc600;
+        }
+        50% {
+          color: #34cfeb;
+        }
+        75% {
+          color: #a534eb;
+        }
+        100% {
+          color: #f700ff;
+        }
+  }
+  
+  @-webkit-keyframes rainbow {
+      0% {
+          color: #f700ff;
+        }
+        25% {
+          color: #edc600;
+        }
+        50% {
+          color: #34cfeb;
+        }
+        75% {
+          color: #a534eb;
+        }
+        100% {
+          color: #f700ff;
+        }
+  }
+  

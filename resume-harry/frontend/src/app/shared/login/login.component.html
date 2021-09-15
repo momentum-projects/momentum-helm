@@ -1,0 +1,29 @@
+<section>
+  <h5 nz-typography>Your User ID</h5>
+  <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+    <div nz-col nzSpan="8" class="gutter-row">
+      <nz-input-number
+        [(ngModel)]="currentUserId"
+        [nzMin]="0"
+        [nzMax]="profileService.getProfiles().length - 1"
+        style="width: 100%"
+        ngDefaultControl
+      ></nz-input-number>
+    </div>
+  </div>
+  <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+    <div nz-col nzSpan="8" class="gutter-row">
+      <button
+        nz-button
+        [disabled]="currentUserId === undefined"
+        nzType="primary"
+        (click)="loginService.setCurrentUser(currentUserId)"
+        routerLink="/profiles"
+        routerLinkActive="active"
+        nzBlock
+      >
+        Log In
+      </button>
+    </div>
+  </div>
+</section>

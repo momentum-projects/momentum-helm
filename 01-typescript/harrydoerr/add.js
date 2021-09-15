@@ -1,0 +1,16 @@
+import * as readline from "readline";
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let val1;
+let val2;
+rl.question("first number", answer => {
+    val1 = answer;
+    rl.question("second number: ", answer => {
+        val2 = answer;
+        console.log("The sum is: " + (parseInt(val1) + parseInt(val2)));
+        rl.close();
+    });
+});
+//# sourceMappingURL=add.js.map

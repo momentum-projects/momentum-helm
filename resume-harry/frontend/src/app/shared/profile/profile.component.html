@@ -1,0 +1,66 @@
+<nz-card>
+  <div
+    *ngIf="
+      profileObject?.id === currentUserProfile?.id;
+      then thenBlock;
+      else elseBlock
+    "
+  ></div>
+  <ng-template #thenBlock>
+    <div nz-row nzJustify="start">
+      <div nz-col nzSpan="8" class="gutter-row">
+        <h6 nz-typography nzType="secondary">First Name</h6>
+      </div>
+      <div nz-col nzSpan="8" class="gutter-row">
+        <h6 nz-typography nzType="secondary">Last Name</h6>
+      </div>
+    </div>
+    <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+      <div nz-col nzSpan="8" class="gutter-row">
+        <input nz-input [(ngModel)]="currentUserFirstName" nzSize="large" />
+      </div>
+      <div nz-col nzSpan="8" class="gutter-row">
+        <input nz-input [(ngModel)]="currentUserLastName" nzSize="large" />
+      </div>
+    </div>
+    <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
+      <div nz-col nzFlex="auto">
+        <app-experience [profile]="profile"></app-experience>
+      </div>
+      <div nz-col>
+        <button nz-button (click)="currentUserProfileUpdate()">
+          Update Profile
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #elseBlock>
+    <div nz-row nzJustify="start">
+      <div nz-col nzSpan="8" class="gutter-row">
+        <h6 nz-typography nzType="secondary">First Name</h6>
+      </div>
+      <div nz-col nzSpan="8" class="gutter-row">
+        <h6 nz-typography nzType="secondary">Last Name</h6>
+      </div>
+    </div>
+    <div nz-row nzJustify="start" [nzGutter]="[16, 24]">
+      <div nz-col nzSpan="8" class="gutter-row">
+        <h4 nz-typography>{{ profileObject?.firstName }}</h4>
+      </div>
+      <div nz-col nzSpan="8" class="gutter-row">
+        <h4 nz-typography>{{ profileObject?.lastName }}</h4>
+      </div>
+    </div>
+    <div nz-row nzJustify="start" nzAlign="bottom" [nzGutter]="[16, 24]">
+      <div nz-col nzFlex="auto">
+        <app-experience [profile]="profile"></app-experience>
+      </div>
+      <div nz-col>
+        <app-connect-button
+          [profile]="profile"
+          ngDefaultControl
+        ></app-connect-button>
+      </div>
+    </div>
+  </ng-template>
+</nz-card>
