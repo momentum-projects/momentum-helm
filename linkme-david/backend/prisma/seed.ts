@@ -5,45 +5,41 @@ const prisma = new PrismaClient();
 
 async function main() {
 
-    await prisma.profile.create({ data: {
-        id: 1,
+    const p1 = await prisma.profile.create({ data: {
         firstName: "Chris",
         lastName: "Athanas",
         title: "Mr",
         experience: ["Chef", "Spiderman"]
     }});
-    await prisma.profile.create({ data: {
-        id: 2,
+    const p2 = await prisma.profile.create({ data: {
         firstName: "David",
         lastName: "Rasch",
         title: "Mr",
         experience: ["Instructor", "Floor Buffer"]
     }});
-    await prisma.profile.create({ data: {
-        id: 3,
+    const p3 = await prisma.profile.create({ data: {
         firstName: "Harry",
         lastName: "Stephens",
         title: "Mr",
         experience: ["Detective", "Window Cleaner"]
     }});
-    await prisma.profile.create({ data: {
-        id: 4,
+    const p4 = await prisma.profile.create({ data: {
         firstName: "Dee",
         lastName: "Meyers",
         title: "Ms",
         experience: ["Yogurt Chef"]
     }});
     await prisma.connection.create({ data: {
-        connectedFromId: 1,
-        connectedToId: 2,
+        connectedFromId: p1.id,
+        connectedToId: p2.id,
     }});
     await prisma.connection.create({ data: {
-        connectedFromId: 2,
-        connectedToId: 3,
+        connectedFromId: p2.id,
+        connectedToId: p3.id,
     }});
     await prisma.connection.create({ data: {
-        connectedFromId: 1,
-        connectedToId: 4,
+        connectedFromId: p1.id,
+        connectedToId: p4.id,
     }});
 }
 
