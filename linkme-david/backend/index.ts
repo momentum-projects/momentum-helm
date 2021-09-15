@@ -4,7 +4,7 @@ import { graphqlHTTP } from "express-graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 
 const prisma = new PrismaClient();
-
+const port = 4000
 const typeDefs = `
   type Profile {
     id: Int!
@@ -41,4 +41,6 @@ app.use(
   })
 );
 
-app.listen(4000);
+app.listen(port, () => {
+  console.log(`🚂 Express is running on port ${port}!`)
+});

@@ -1,6 +1,6 @@
 # Backend README
 
-## GraphQL Server Run Command
+## Express Server Run Command
 `npx ts-node index.ts`
 
 ## GraphQL Example Query
