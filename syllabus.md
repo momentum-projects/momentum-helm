@@ -35,8 +35,8 @@
 | Day 7 | Morning | [Express](express.md) |
 | Day 7 | Afternoon | [Express with GraphQL](express.md) |
 | Day 8 | Morning | [Connecting GraphQL end-to-end](express.md) |
-| Day 8 | Afternoon | [Considerations for Deployment, Extensions and Libraries] |
-| Day 9 | Morning |  [Misc Topics] |
+| Day 8 | Afternoon |  [Connecting GraphQL end-to-end](express.md) |
+| Day 9 | Morning | [Considerations for Deployment, Extensions and Libraries] |
 | Day 9 | Afternoon | [Debugging, Logging, Security, Access Control] |
 
 ## Week 3
