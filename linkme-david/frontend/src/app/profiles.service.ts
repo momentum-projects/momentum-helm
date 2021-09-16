@@ -43,7 +43,33 @@ export class ProfilesService {
   constructor() {
     this.load();
   }
+  // loadProfilesFromGraphQl() {
+  //     // this.apolloProvider
+  //     //   .watchQuery({
+  //     //     query: gql`
+  //     //       query {
+  //     //         user(login: "drasch") {
+  //     //           avatarUrl
+  //     //           repositories(first: 20, privacy: PUBLIC) {
+  //     //             totalCount
+  //     //             nodes {
+  //     //               name
+  //     //               url
+  //     //             }
+  //     //           }
+  //     //         }
+  //     //       }
+  //     //     `,
+  //     //   })
+  //     //   .valueChanges.subscribe(({ data }: any) => {
+  //     //     console.log(data);
+  //     //     this.avatarUrl = data?.user?.avatarUrl || null;
+  //     //     this.repositories = data?.user?.repositories?.nodes || [];
+  //     //   });
+  // }
   load() {
+    // this.profiles = JSON.parse(loadProfilesFromGraphQl() || '[]').map()
+
     this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
       (obj: Profile) => this.decodeProfile(obj)
     );

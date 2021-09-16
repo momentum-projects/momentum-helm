@@ -39,6 +39,7 @@ export class ExperienceComponent implements OnInit {
 
   loadRepositories() {
     this.apolloProvider
+      .use('github')
       .watchQuery({
         query: gql`
           query {
