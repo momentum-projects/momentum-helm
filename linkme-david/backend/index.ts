@@ -5,7 +5,9 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 const expressPlayground = require('graphql-playground-middleware-express')
   .default
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ["query"]
+});
 const port = 4000;
 const typeDefs = `
   type Profile {
@@ -54,20 +56,13 @@ const resolvers = {
         },
       });
     },
-    getConnections: (_: any, { profileId }: { profileId: number } ) => {
-      return prisma.connection.findMany({
+    getConnections: async (_: any, { profileId }: { profileId: number } ) => {
+      const connections = await prisma.connection.findMany({
         where: {
           connectedFromId: profileId
         },
-        include: {
-          connectedFromProfile: true,
-          connectedToProfile: {
-            include: {
-              connections: true
-            }
-          }
-        }
       });
+      return connections;
     },
   },
   Profile: {
@@ -81,28 +76,20 @@ const resolvers = {
   },
   Connection: {
     connectedFromProfile: (parent: any) => {
-      return prisma.connection
+      return prisma.profile
         .findUnique({
           where: {
-            connectedFromId_connectedToId:{
-              connectedFromId: parent?.connectedFromId,
-              connectedToId: parent?.connectedToId
-            }
+            id: parent?.connectedFromId,
           },
-        })
-        .connectedFromProfile();
+        });
       },
     connectedToProfile: (parent: any) => {
-      return prisma.connection
+      return prisma.profile
         .findUnique({
           where: {
-            connectedFromId_connectedToId:{
-              connectedFromId: parent?.connectedFromId,
-              connectedToId: parent?.connectedToId
-            }
+            id: parent?.connectedToId,
           },
-        })
-        .connectedToProfile();
+        });
       },
   },
   Mutation: {
