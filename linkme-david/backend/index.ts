@@ -14,22 +14,15 @@ const typeDefs = `
     firstName: String
     lastName: String
     title: String
-    connections: [ProfileConnections]
-  }
-
-  type ProfileConnections {
-    id: Int
-    profile: Profile
-    connection: Connection
-    profileId: Int
-    connectionId: Int
+    connections: [Connection]
+    incomingConnections: [Connection]
   }
 
   type Connection {
-    id: Int!
-    outboundId: Int
-    inboundId: Int
-    connections: [ProfileConnections]
+    connectedFromProfile: Profile
+    connectedFromId: Int
+    connectedToProfile: Profile
+    connectedToId: Int
   }
 
   type Query {
@@ -38,10 +31,6 @@ const typeDefs = `
 
   type Query {
     oneProfile(id: Int!): Profile
-  }
-
-  type Query {
-    getProfileConnections(profileId: Int!): [Connection]
   }
 
   type Query {
@@ -65,28 +54,21 @@ const resolvers = {
         },
       });
     },
-    // getProfileConnections: (profileId: number) => {
-    //   return prisma.connection.findMany({
-    //     where: {
-    //       connections: {
-    //         every: {
-    //           profileId: { 
-    //             equals: 1 
-    //           },
-    //         },
-    //       },
-    //     },
-    //   });
-    // },
-    // getConnections: (profileId: number) => {
-    //   return prisma.connection.findMany({
-    //     where: {
-    //       inboundId: {
-    //         equals: 1,
-    //       },
-    //     },
-    //   });
-    // },
+    getConnections: (_: any, { profileId }: { profileId: number } ) => {
+      return prisma.connection.findMany({
+        where: {
+          connectedFromId: profileId
+        },
+        include: {
+          connectedFromProfile: true,
+          connectedToProfile: {
+            include: {
+              connections: true
+            }
+          }
+        }
+      });
+    },
   },
   Mutation: {
     createProfile: async (_:any, data: { firstName: string, lastName: string, title: string, experience: string }) => {
@@ -118,7 +100,7 @@ app.use(
 app.get(
   '/playground',
   expressPlayground({
-    endpoint: '/graphql/</script><script>alert(1)</script><script>',
+    endpoint: '/graphql/',
   }),
 )
 

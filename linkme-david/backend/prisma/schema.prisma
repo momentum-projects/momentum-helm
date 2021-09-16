@@ -20,8 +20,8 @@ model Profile {
 model Connection {
   connectedFromId Int
   connectedToId   Int
-  connectedFrom   Profile @relation("connectedFrom", fields: [connectedFromId], references: [id])
-  connectedTo     Profile @relation("connectedTo", fields: [connectedToId], references: [id])
+  connectedFromProfile   Profile @relation("connectedFrom", fields: [connectedFromId], references: [id])
+  connectedToProfile     Profile @relation("connectedTo", fields: [connectedToId], references: [id])
 
   @@id([connectedFromId, connectedToId])
 }
