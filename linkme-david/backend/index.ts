@@ -56,13 +56,12 @@ const resolvers = {
         },
       });
     },
-    getConnections: async (_: any, { profileId }: { profileId: number } ) => {
-      const connections = await prisma.connection.findMany({
+    getConnections: (_: any, { profileId }: { profileId: number } ) => {
+      return prisma.connection.findMany({
         where: {
           connectedFromId: profileId
         },
       });
-      return connections;
     },
   },
   Profile: {
