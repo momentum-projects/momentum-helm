@@ -6,18 +6,18 @@ import { setContext } from '@apollo/client/link/context';
 import { environment } from 'src/environments/environment';
 
 const githubUri = 'https://api.github.com/graphql';
-const defaultUri = 'https://localhost:4000/graphql';
-export function createNamedApollo(
+// const defaultUri = 'https://localhost:4000/graphql';
+const defaultUri = 'https://api.github.com/graphql';
+export const createNamedApollo = (
   httpLink: HttpLink
-): Record<string, ApolloClientOptions<any>> {
+): Record<string, ApolloClientOptions<any>> => {
   return {
     github: {
-      name: 'github',
       link: authLink.concat(httpLink.create({ uri: githubUri })),
       cache: new InMemoryCache(),
     },
   };
-}
+};
 
 export function createDefaultApollo(
   httpLink: HttpLink
@@ -44,11 +44,11 @@ const authLink = setContext((_, { headers }) => {
       useFactory: createNamedApollo,
       deps: [HttpLink],
     },
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: createDefaultApollo,
-      deps: [HttpLink],
-    },
+    // {
+    //   provide: APOLLO_OPTIONS,
+    //   useFactory: createDefaultApollo,
+    //   deps: [HttpLink],
+    // },
   ],
 })
 export class GraphQLModule { }
