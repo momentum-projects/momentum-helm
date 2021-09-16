@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { map } from 'rxjs/operators'
 
 export default class Profile {
   constructor(
@@ -40,36 +42,30 @@ export class ProfilesService {
     let profile = Object.create(Profile.prototype);
     return Object.assign(profile, json);
   }
-  constructor() {
+  constructor(public apolloProvider: Apollo) {
     this.load();
   }
-  // loadProfilesFromGraphQl() {
-  //     // this.apolloProvider
-  //     //   .watchQuery({
-  //     //     query: gql`
-  //     //       query {
-  //     //         user(login: "drasch") {
-  //     //           avatarUrl
-  //     //           repositories(first: 20, privacy: PUBLIC) {
-  //     //             totalCount
-  //     //             nodes {
-  //     //               name
-  //     //               url
-  //     //             }
-  //     //           }
-  //     //         }
-  //     //       }
-  //     //     `,
-  //     //   })
-  //     //   .valueChanges.subscribe(({ data }: any) => {
-  //     //     console.log(data);
-  //     //     this.avatarUrl = data?.user?.avatarUrl || null;
-  //     //     this.repositories = data?.user?.repositories?.nodes || [];
-  //     //   });
-  // }
+  loadProfilesFromGraphQl() {
+    return this.apolloProvider
+      .watchQuery({
+        query: gql`
+          query {
+            allProfiles {
+              id
+              title
+              firstName
+              lastName
+              experience
+            }
+          }
+        `,
+      })
+      .valueChanges.pipe(map((data: any) => data)).toPromise();
+  }
   load() {
-    // this.profiles = JSON.parse(loadProfilesFromGraphQl() || '[]').map()
-
+    this.loadProfilesFromGraphQl().then(data => {
+      console.log(data)
+    });
     this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
       (obj: Profile) => this.decodeProfile(obj)
     );

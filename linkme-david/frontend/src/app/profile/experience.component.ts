@@ -57,7 +57,6 @@ export class ExperienceComponent implements OnInit {
         `,
       })
       .valueChanges.subscribe(({ data }: any) => {
-        console.log(data);
         this.avatarUrl = data?.user?.avatarUrl || null;
         this.repositories = data?.user?.repositories?.nodes || [];
       });
