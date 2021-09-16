@@ -70,6 +70,41 @@ const resolvers = {
       });
     },
   },
+  Profile: {
+    connections: (parent: any) => {
+      return prisma.profile
+        .findUnique({
+          where: { id: parent?.id },
+        })
+        .connections();
+      }
+  },
+  Connection: {
+    connectedFromProfile: (parent: any) => {
+      return prisma.connection
+        .findUnique({
+          where: {
+            connectedFromId_connectedToId:{
+              connectedFromId: parent?.connectedFromId,
+              connectedToId: parent?.connectedToId
+            }
+          },
+        })
+        .connectedFromProfile();
+      },
+    connectedToProfile: (parent: any) => {
+      return prisma.connection
+        .findUnique({
+          where: {
+            connectedFromId_connectedToId:{
+              connectedFromId: parent?.connectedFromId,
+              connectedToId: parent?.connectedToId
+            }
+          },
+        })
+        .connectedToProfile();
+      },
+  },
   Mutation: {
     createProfile: async (_:any, data: { firstName: string, lastName: string, title: string, experience: string }) => {
       await prisma.profile.create({ data: {
