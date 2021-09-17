@@ -2,7 +2,7 @@
 
 ## Steps
 
-1. [Generate Tokens](https://github.com/momentum-projects/momentum-helm/commit/180cd328ed9d2fa462e9e2ee2478ff3696750039) __⚠️ - generally, don't put your secret into Git like this, instaed you should store your secret in your environment file__
+1. [Generate Tokens](https://github.com/momentum-projects/momentum-helm/commit/180cd328ed9d2fa462e9e2ee2478ff3696750039) __⚠️ - don't put your secret into Git like this, instaed you should store your secret in your environment file__
 
 ## Packages
 
