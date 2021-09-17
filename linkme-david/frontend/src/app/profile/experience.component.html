@@ -15,7 +15,7 @@
         />
         <div
           *ngIf="
-            experienceForm.form.controls.experience.invalid &&
+            experienceForm.form.controls.experience?.invalid &&
             (experience.dirty || experience.touched)
           "
           style="color: red"
