@@ -4,6 +4,7 @@ import { graphqlHTTP } from "express-graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import cors from 'cors';
 import jsonwebtoken from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 const expressPlayground = require('graphql-playground-middleware-express')
   .default
@@ -117,8 +118,8 @@ let corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
-
-const JWT_SECRET = Buffer.from('JLVUx4DCP2OUqiYxzrHA66sIu8MgOLPjhxc9y7sbllU=', 'base64');
+dotenv.config()
+const JWT_SECRET = Buffer.from(process.env.JWT_SECRET as string, 'base64');
 
 app.post('/login',
   express.json(),
