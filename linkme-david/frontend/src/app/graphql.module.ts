@@ -13,22 +13,13 @@ export const createNamedApollo = (
 ): Record<string, ApolloClientOptions<any>> => {
   return {
     github: {
-      link: authLink.concat(httpLink.create({ uri: githubUri })),
+      link: namedAuthLink.concat(httpLink.create({ uri: githubUri })),
       cache: new InMemoryCache(),
     },
   };
 };
 
-export function createDefaultApollo(
-  httpLink: HttpLink
-): ApolloClientOptions<any> {
-  return {
-    link: authLink.concat(httpLink.create({ uri: defaultUri })),
-    cache: new InMemoryCache(),
-  };
-}
-
-const authLink = setContext((_, { headers }) => {
+const namedAuthLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
@@ -36,6 +27,25 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
+
+export function createDefaultApollo(
+  httpLink: HttpLink
+): ApolloClientOptions<any> {
+  return {
+    link: defaultAuthLink.concat(httpLink.create({ uri: defaultUri })),
+    cache: new InMemoryCache(),
+  };
+}
+
+const defaultAuthLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      authorization: 'Bearer ' + localStorage.getItem('authorization'),
+    },
+  };
+});
+
 
 @NgModule({
   providers: [

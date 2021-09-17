@@ -25,19 +25,19 @@ const PROFILES_KEY = 'profiles';
 export class ProfilesService {
   profiles: Profile[] = [];
 
-  get defaultProfiles() {
-    return [
-      new Profile(1, 'David', 'Rasch', 'Mr.', [
-        'Developer 2020',
-        'Angular Instructor 2021',
-      ]),
-      new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
-      new Profile(3, 'Dee', 'Meyers', 'Ms.', [
-        'Student 2020',
-        'Developer 2021',
-      ]),
-    ];
-  }
+  // get defaultProfiles() {
+  //   return [
+  //     new Profile(1, 'David', 'Rasch', 'Mr.', [
+  //       'Developer 2020',
+  //       'Angular Instructor 2021',
+  //     ]),
+  //     new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
+  //     new Profile(3, 'Dee', 'Meyers', 'Ms.', [
+  //       'Student 2020',
+  //       'Developer 2021',
+  //     ]),
+  //   ];
+  // }
   decodeProfile(json: Profile): Profile {
     let profile = Object.create(Profile.prototype);
     return Object.assign(profile, json);
@@ -47,7 +47,7 @@ export class ProfilesService {
   }
   loadProfilesFromGraphQl() {
     return this.apolloProvider
-      .watchQuery({
+      .query({
         query: gql`
           query {
             allProfiles {
@@ -60,20 +60,17 @@ export class ProfilesService {
           }
         `,
       })
-      .valueChanges.pipe(map((data: any) => data)).toPromise();
+      .pipe(map((data: any) => data)).toPromise();
   }
-  load() {
-    this.loadProfilesFromGraphQl().then(data => {
-      console.log(data)
-    });
-    this.profiles = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]').map(
-      (obj: Profile) => this.decodeProfile(obj)
-    );
+  async load() {
+    this.profiles = (await this.loadProfilesFromGraphQl()).data.allProfiles.map((item: Profile) => {
+      return {
+        ...item,
+        connections: []
+      }
+    })
+  }
 
-    if (this.profiles.length == 0) {
-      this.profiles = this.defaultProfiles;
-    }
-  }
   save() {
     localStorage.setItem(PROFILES_KEY, JSON.stringify(this.profiles));
   }

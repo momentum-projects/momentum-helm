@@ -3,7 +3,7 @@
     <ul nz-menu nzMode="inline">
       <li *ngFor="let profile of profilesService.getProfiles()" nz-menu-item>
         <a [routerLink]="['/profiles', profile.id]">
-          {{ profile.name }}
+          {{ profile.firstName }} {{ profile.lastName }}
         </a>
       </li>
     </ul>

@@ -14,9 +14,10 @@
     </ul>
   </nz-header>
   <nz-content>
+    {{profilesService.getProfiles()}}
     <div>
       <a nz-dropdown [nzDropdownMenu]="menu">
-        {{ loginService.getCurrentProfile().name }}
+        {{ loginService.getCurrentProfile()?.name }}
         <i nz-icon nzType="down"></i>
       </a>
       <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -26,14 +27,14 @@
             (click)="loginService.setCurrentUser(profile.id)"
             nz-menu-item
           >
-            {{ profile.name }} ({{ profile.id }} )
+            {{ profile.firstName }} ({{ profile.id }} )
           </li>
         </ul>
       </nz-dropdown-menu>
     </div>
     <nz-breadcrumb>
       <nz-breadcrumb-item>
-        {{ loginService.getCurrentProfile().name }}
+        {{ loginService.getCurrentProfile()?.firstName }}
       </nz-breadcrumb-item>
       <nz-breadcrumb-item>
         {{ "LinkMe" }}
