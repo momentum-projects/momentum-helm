@@ -2,6 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import cors from 'cors';
+import jsonwebtoken from 'jsonwebtoken';
+
 const expressPlayground = require('graphql-playground-middleware-express')
   .default
 
@@ -109,12 +112,28 @@ export const schema = makeExecutableSchema({
 });
 
 const app = express();
-import cors from 'cors'
 let corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
+
+const JWT_SECRET = Buffer.from('JLVUx4DCP2OUqiYxzrHA66sIu8MgOLPjhxc9y7sbllU=', 'base64');
+
+app.post('/login',
+  express.json(),
+  (req, res) => {
+    if (req.body.email == "david" && req.body.password == "secret") {
+      const userId = 1;
+      const token = jsonwebtoken.sign({ sub: userId }, JWT_SECRET, { expiresIn: '1h' });
+      res.status(200).json({ token });
+    }
+    else {
+      res.sendStatus(401);
+    }
+  }
+)
+
 app.use(
   "/graphql",
   graphqlHTTP({
