@@ -148,7 +148,7 @@ const authenticationMiddleware = (
   res: Response<any, Record<string, any>>,
   next: NextFunction
 ) => {
-  if(true || (req?.user as {sub: number})?.sub > 0) {
+  if((req?.user as {sub: number})?.sub > 0) {
     next()
   }
 };

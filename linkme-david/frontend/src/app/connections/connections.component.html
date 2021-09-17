@@ -1,6 +1,7 @@
 <ul>
   <li *ngFor="let profile of profilesService.getProfiles()">
-    {{ profile.name }}
+    {{ profile.firstName }}
+    {{ profile.lastName }}
     <span *ngIf="!isCurrentUser(profile.id)">
       <button
         *ngIf="!isConnected(profile.id)"

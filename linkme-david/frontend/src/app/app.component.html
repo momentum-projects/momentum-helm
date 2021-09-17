@@ -14,10 +14,10 @@
     </ul>
   </nz-header>
   <nz-content>
-    {{profilesService.getProfiles()}}
     <div>
       <a nz-dropdown [nzDropdownMenu]="menu">
-        {{ loginService.getCurrentProfile()?.name }}
+        {{ loginService.getCurrentProfile()?.firstName }}
+        {{ loginService.getCurrentProfile()?.lastName }}
         <i nz-icon nzType="down"></i>
       </a>
       <nz-dropdown-menu #menu="nzDropdownMenu">

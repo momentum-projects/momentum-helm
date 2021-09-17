@@ -60,10 +60,10 @@ export class ProfilesService {
           }
         `,
       })
-      .pipe(map((data: any) => data)).toPromise();
+      .pipe(map(({ data }: any) => data)).toPromise();
   }
   async load() {
-    this.profiles = (await this.loadProfilesFromGraphQl()).data.allProfiles.map((item: Profile) => {
+    this.profiles = (await this.loadProfilesFromGraphQl())?.allProfiles?.map((item: Profile) => {
       return {
         ...item,
         connections: []
