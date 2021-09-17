@@ -11,7 +11,13 @@ export class ConnectionsComponent {
   constructor(
     public profilesService: ProfilesService,
     public loginService: LoginService
-  ) {}
+  ) {
+    this.loginService.loginEventEmitter.subscribe((value: boolean) => {
+      // login service event
+      console.log({ loginServiceEvent: value});
+      this.profilesService.load()
+    })
+  }
 
   isCurrentUser(profileId: number) {
     return this.loginService.getCurrentUser() == profileId;

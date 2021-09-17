@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ProfilesService } from './profiles.service';
 import { Apollo, gql } from 'apollo-angular';
 import { HttpClient, HttpResponse } from '@angular/common/http';
@@ -9,15 +9,27 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
   currentUser = 1;
+  _loggedIn = false;
+  public loginEventEmitter = new EventEmitter<boolean>();
+
+  set loggedIn(value: boolean) {
+    this._loggedIn = value;
+    this.loginEventEmitter.emit(this._loggedIn);
+  }
 
   constructor(
     public profilesService: ProfilesService,
     private http: HttpClient
   ) {
-    this.submitLoginCredentials('david', 'secret').subscribe(
-      (res: HttpResponse<any>) => {
-        localStorage.setItem('authorization', res.body?.token)
-      })
+    this.loggedIn = !!localStorage.getItem('authorization');
+
+    if (!this.loggedIn) {
+      this.submitLoginCredentials('david', 'secret').subscribe(
+        (res: HttpResponse<any>) => {
+          localStorage.setItem('authorization', res.body?.token)
+          this.loggedIn = true;
+        })
+    }
 
     this.currentUser =
       parseInt(localStorage.getItem('USER') || '0') ||

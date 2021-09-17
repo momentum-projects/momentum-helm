@@ -38,6 +38,7 @@ export function createDefaultApollo(
 }
 
 const defaultAuthLink = setContext((_, { headers }) => {
+  console.log({context: headers});
   return {
     headers: {
       ...headers,

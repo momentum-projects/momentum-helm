@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs/operators'
+import { LoginService } from './login.service';
 
 export default class Profile {
   constructor(
@@ -63,12 +64,17 @@ export class ProfilesService {
       .pipe(map(({ data }: any) => data)).toPromise();
   }
   async load() {
-    this.profiles = (await this.loadProfilesFromGraphQl())?.allProfiles?.map((item: Profile) => {
-      return {
-        ...item,
-        connections: []
-      }
-    })
+    try {
+      this.profiles = (await this.loadProfilesFromGraphQl())?.allProfiles?.map((item: Profile) => {
+        return {
+          ...item,
+          connections: []
+        }
+      })
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   save() {
