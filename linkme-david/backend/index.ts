@@ -1,16 +1,18 @@
 import { PrismaClient } from "@prisma/client";
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { graphqlHTTP } from "express-graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import cors from 'cors';
-import jsonwebtoken from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import cors from "cors";
+import jsonwebtoken from "jsonwebtoken";
+import dotenv from "dotenv";
+import jwt from "express-jwt";
+import QueryString from "qs";
 
-const expressPlayground = require('graphql-playground-middleware-express')
-  .default
+const expressPlayground =
+  require("graphql-playground-middleware-express").default;
 
 const prisma = new PrismaClient({
-  log: ["query"]
+  log: ["query"],
 });
 const port = 4000;
 const typeDefs = `
@@ -60,10 +62,10 @@ const resolvers = {
         },
       });
     },
-    getConnections: (_: any, { profileId }: { profileId: number } ) => {
+    getConnections: (_: any, { profileId }: { profileId: number }) => {
       return prisma.connection.findMany({
         where: {
-          connectedFromId: profileId
+          connectedFromId: profileId,
         },
       });
     },
@@ -75,36 +77,44 @@ const resolvers = {
           where: { id: parent?.id },
         })
         .connections();
-      }
+    },
   },
   Connection: {
     connectedFromProfile: (parent: any) => {
-      return prisma.profile
-        .findUnique({
-          where: {
-            id: parent?.connectedFromId,
-          },
-        });
-      },
+      return prisma.profile.findUnique({
+        where: {
+          id: parent?.connectedFromId,
+        },
+      });
+    },
     connectedToProfile: (parent: any) => {
-      return prisma.profile
-        .findUnique({
-          where: {
-            id: parent?.connectedToId,
-          },
-        });
-      },
+      return prisma.profile.findUnique({
+        where: {
+          id: parent?.connectedToId,
+        },
+      });
+    },
   },
   Mutation: {
-    createProfile: async (_:any, data: { firstName: string, lastName: string, title: string, experience: string }) => {
-      await prisma.profile.create({ data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        title: data.title,
-        experience: [data.experience]
-      }});
-    }
-  }
+    createProfile: async (
+      _: any,
+      data: {
+        firstName: string;
+        lastName: string;
+        title: string;
+        experience: string;
+      }
+    ) => {
+      await prisma.profile.create({
+        data: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          title: data.title,
+          experience: [data.experience],
+        },
+      });
+    },
+  },
 };
 
 export const schema = makeExecutableSchema({
@@ -114,44 +124,57 @@ export const schema = makeExecutableSchema({
 
 const app = express();
 let corsOptions = {
-  origin: 'http://localhost:4200',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-app.use(cors(corsOptions))
-dotenv.config()
-const JWT_SECRET = Buffer.from(process.env.JWT_SECRET as string, 'base64');
+  origin: "http://localhost:4200",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
+dotenv.config();
+const JWT_SECRET = Buffer.from(process.env.JWT_SECRET as string, "base64");
 
-app.post('/login',
-  express.json(),
-  (req, res) => {
-    if (req.body.email == "david" && req.body.password == "secret") {
-      const userId = 1;
-      const token = jsonwebtoken.sign({ sub: userId }, JWT_SECRET, { expiresIn: '1h' });
-      res.status(200).json({ token });
-    }
-    else {
-      res.sendStatus(401);
-    }
+app.post("/login", express.json(), (req, res) => {
+  if (req.body.email == "david" && req.body.password == "secret") {
+    const userId = 1;
+    const token = jsonwebtoken.sign({ sub: userId }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    res.status(200).json({ token });
+  } else {
+    res.sendStatus(401);
   }
-)
+});
+
+const authenticationMiddleware = (
+  req: Request<{}, any, any, QueryString.ParsedQs, Record<string, any>>,
+  res: Response<any, Record<string, any>>,
+  next: NextFunction
+) => {
+  if(true || (req?.user as {sub: number})?.sub > 0) {
+    next()
+  }
+};
+
+let root = {
+
+}
 
 app.use(
   "/graphql",
+  jwt({ secret: JWT_SECRET, algorithms: ["HS256"], credentialsRequired: false }),
+  authenticationMiddleware,
   graphqlHTTP({
     schema,
-    graphiql: true,
   })
 );
 
 app.get(
-  '/playground',
+  "/playground",
   expressPlayground({
-    endpoint: '/graphql/',
-  }),
-)
+    endpoint: "/graphql/",
+  })
+);
 
 app.listen(port, () => {
   console.log(
-    `Serving the GraphQL Playground on http://localhost:${port}/playground`,
-  )
+    `Serving the GraphQL Playground on http://localhost:${port}/playground`
+  );
 });
