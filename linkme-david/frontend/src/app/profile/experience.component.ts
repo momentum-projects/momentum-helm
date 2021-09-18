@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Apollo, gql } from 'apollo-angular';
 import { ProfilesService } from '../profiles.service';
+import { HttpClient } from '@angular/common/http';
+import { githubToken } from 'src/environments/secrets';
+
+const githubUri = 'https://api.github.com/graphql';
 
 @Component({
   selector: 'app-experience',
@@ -18,7 +21,7 @@ export class ExperienceComponent implements OnInit {
 
   constructor(
     public profilesService: ProfilesService,
-    public apolloProvider: Apollo
+    public http: HttpClient
   ) {}
 
   onSubmit(experienceForm: NgForm) {
@@ -38,10 +41,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   loadRepositories() {
-    this.apolloProvider
-      .use('github')
-      .watchQuery({
-        query: gql`
+    const query = `
           query {
             user(login: "drasch") {
               avatarUrl
@@ -54,9 +54,12 @@ export class ExperienceComponent implements OnInit {
               }
             }
           }
-        `,
+        `;
+    const resp = this.http
+      .post(githubUri, JSON.stringify({ query }), {
+        headers: { authorization: `Bearer ${githubToken}` },
       })
-      .valueChanges.subscribe(({ data }: any) => {
+      .subscribe(({ data }: any) => {
         this.avatarUrl = data?.user?.avatarUrl || null;
         this.repositories = data?.user?.repositories?.nodes || [];
       });

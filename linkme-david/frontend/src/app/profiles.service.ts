@@ -1,8 +1,9 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { map } from 'rxjs/operators'
-import { LoginService } from './login.service';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
+const defaultUri = 'http://localhost:4000/graphql';
 export default class Profile {
   constructor(
     public id: number,
@@ -43,14 +44,16 @@ export class ProfilesService {
     let profile = Object.create(Profile.prototype);
     return Object.assign(profile, json);
   }
-  constructor(public apolloProvider: Apollo) {
+  constructor(public http: HttpClient) {
     this.load();
   }
   loadProfilesFromGraphQl() {
-    return this.apolloProvider
-      .query({
-        query: gql`
-          query {
+    return this.http
+      .post(
+        defaultUri,
+        JSON.stringify({
+          query: `
+          dquery {
             allProfiles {
               id
               title
@@ -60,21 +63,34 @@ export class ProfilesService {
             }
           }
         `,
-      })
-      .pipe(map(({ data }: any) => data)).toPromise();
+        })
+      )
+      .pipe(catchError(this.handleError));
   }
-  async load() {
-    try {
-      this.profiles = (await this.loadProfilesFromGraphQl())?.allProfiles?.map((item: Profile) => {
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError('Something bad happened; please try again later.');
+  }
+  load() {
+    this.loadProfilesFromGraphQl().subscribe(({ data }: any) => {
+      this.profiles = data?.allProfiles?.map((item: Profile) => {
         return {
           ...item,
-          connections: []
-        }
-      })
-    }
-    catch (error) {
-      console.log(error);
-    }
+          connections: [],
+        };
+      });
+    });
   }
 
   save() {

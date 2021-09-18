@@ -1,6 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { ProfilesService } from './profiles.service';
-import { Apollo, gql } from 'apollo-angular';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -21,14 +20,17 @@ export class LoginService {
     public profilesService: ProfilesService,
     private http: HttpClient
   ) {
+    // localStorage.removeItem('authorization');
     this.loggedIn = !!localStorage.getItem('authorization');
 
     if (!this.loggedIn) {
       this.submitLoginCredentials('david', 'secret').subscribe(
         (res: HttpResponse<any>) => {
-          localStorage.setItem('authorization', res.body?.token)
+          localStorage.setItem('authorization', res.body?.token);
+          console.log('setting token');
           this.loggedIn = true;
-        })
+        }
+      );
     }
 
     this.currentUser =
@@ -39,12 +41,16 @@ export class LoginService {
   baseURL: string = 'http://localhost:4000/login/';
 
   submitLoginCredentials(email: string, password: string): Observable<any> {
-    return this.http.post(this.baseURL, {email: 'david', password: 'secret'}, {
-      headers: {
-        responseType: 'json'
-      },
-      observe: 'response'
-    });
+    return this.http.post(
+      this.baseURL,
+      { email: 'david', password: 'secret' },
+      {
+        headers: {
+          responseType: 'json',
+        },
+        observe: 'response',
+      }
+    );
   }
 
   getCurrentUser() {

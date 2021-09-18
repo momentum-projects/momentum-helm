@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { ProfilesService } from '../profiles.service';
 
@@ -7,16 +7,19 @@ import { ProfilesService } from '../profiles.service';
   templateUrl: './connections.component.html',
   styleUrls: ['./connections.component.scss'],
 })
-export class ConnectionsComponent {
+export class ConnectionsComponent implements OnInit {
   constructor(
     public profilesService: ProfilesService,
     public loginService: LoginService
-  ) {
+  ) {}
+
+  ngOnInit() {
+    // this.profilesService.load();
     this.loginService.loginEventEmitter.subscribe((value: boolean) => {
       // login service event
-      console.log({ loginServiceEvent: value});
-      this.profilesService.load()
-    })
+      console.log({ loginServiceEvent: value });
+      // this.profilesService.load();
+    });
   }
 
   isCurrentUser(profileId: number) {
