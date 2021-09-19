@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
       // Clone the request and replace the original headers with
       // cloned headers, updated with the authorization.
       authReq = request.clone({
-        headers: request.headers.set('Authorization', authToken),
+        headers: request.headers.set('authorization', authToken),
       });
     }
 

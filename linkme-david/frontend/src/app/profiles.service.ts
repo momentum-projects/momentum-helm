@@ -27,33 +27,17 @@ const PROFILES_KEY = 'profiles';
 export class ProfilesService {
   profiles: Profile[] = [];
 
-  // get defaultProfiles() {
-  //   return [
-  //     new Profile(1, 'David', 'Rasch', 'Mr.', [
-  //       'Developer 2020',
-  //       'Angular Instructor 2021',
-  //     ]),
-  //     new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
-  //     new Profile(3, 'Dee', 'Meyers', 'Ms.', [
-  //       'Student 2020',
-  //       'Developer 2021',
-  //     ]),
-  //   ];
-  // }
-  decodeProfile(json: Profile): Profile {
-    let profile = Object.create(Profile.prototype);
-    return Object.assign(profile, json);
-  }
   constructor(public http: HttpClient) {
     this.load();
   }
+
   loadProfilesFromGraphQl() {
     return this.http
       .post(
         defaultUri,
         JSON.stringify({
           query: `
-          dquery {
+          query {
             allProfiles {
               id
               title
@@ -67,6 +51,7 @@ export class ProfilesService {
       )
       .pipe(catchError(this.handleError));
   }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
