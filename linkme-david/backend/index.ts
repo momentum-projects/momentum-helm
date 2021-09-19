@@ -150,6 +150,8 @@ const authenticationMiddleware = (
 ) => {
   if((req?.user as {sub: number})?.sub > 0) {
     next()
+  } else {
+    res.sendStatus(401);
   }
 };
 
