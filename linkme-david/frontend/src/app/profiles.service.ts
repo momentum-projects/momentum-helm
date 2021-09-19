@@ -47,7 +47,8 @@ export class ProfilesService {
             }
           }
         `,
-        })
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
       )
       .pipe(catchError(this.handleError));
   }
