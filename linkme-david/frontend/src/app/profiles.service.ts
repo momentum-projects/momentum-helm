@@ -1,8 +1,9 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { map } from 'rxjs/operators'
-import { LoginService } from './login.service';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
+const defaultUri = 'http://localhost:4000/graphql';
 export default class Profile {
   constructor(
     public id: number,
@@ -26,30 +27,16 @@ const PROFILES_KEY = 'profiles';
 export class ProfilesService {
   profiles: Profile[] = [];
 
-  // get defaultProfiles() {
-  //   return [
-  //     new Profile(1, 'David', 'Rasch', 'Mr.', [
-  //       'Developer 2020',
-  //       'Angular Instructor 2021',
-  //     ]),
-  //     new Profile(2, 'Alan', 'Cox', 'Mr.', ['CTO 2020-2021']),
-  //     new Profile(3, 'Dee', 'Meyers', 'Ms.', [
-  //       'Student 2020',
-  //       'Developer 2021',
-  //     ]),
-  //   ];
-  // }
-  decodeProfile(json: Profile): Profile {
-    let profile = Object.create(Profile.prototype);
-    return Object.assign(profile, json);
-  }
-  constructor(public apolloProvider: Apollo) {
+  constructor(public http: HttpClient) {
     this.load();
   }
+
   loadProfilesFromGraphQl() {
-    return this.apolloProvider
-      .query({
-        query: gql`
+    return this.http
+      .post(
+        defaultUri,
+        JSON.stringify({
+          query: `
           query {
             allProfiles {
               id
@@ -60,21 +47,36 @@ export class ProfilesService {
             }
           }
         `,
-      })
-      .pipe(map(({ data }: any) => data)).toPromise();
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .pipe(catchError(this.handleError));
   }
-  async load() {
-    try {
-      this.profiles = (await this.loadProfilesFromGraphQl())?.allProfiles?.map((item: Profile) => {
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError('Something bad happened; please try again later.');
+  }
+  load() {
+    this.loadProfilesFromGraphQl().subscribe(({ data }: any) => {
+      this.profiles = data?.allProfiles?.map((item: Profile) => {
         return {
           ...item,
-          connections: []
-        }
-      })
-    }
-    catch (error) {
-      console.log(error);
-    }
+          connections: [],
+        };
+      });
+    });
   }
 
   save() {

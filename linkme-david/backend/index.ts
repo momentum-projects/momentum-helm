@@ -150,12 +150,10 @@ const authenticationMiddleware = (
 ) => {
   if((req?.user as {sub: number})?.sub > 0) {
     next()
+  } else {
+    res.status(401).json({"error": "unauthorized"});
   }
 };
-
-let root = {
-
-}
 
 app.use(
   "/graphql",
