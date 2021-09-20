@@ -125,7 +125,7 @@ export const schema = makeExecutableSchema({
 
 const app = express();
 let corsOptions = {
-  origin: "http://localhost:4200",
+  origin: process.env.CORS_ALLOW,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));

@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
-const defaultUri = 'http://localhost:4000/graphql';
 export default class Profile {
   constructor(
     public id: number,
@@ -34,7 +34,7 @@ export class ProfilesService {
   loadProfilesFromGraphQl() {
     return this.http
       .post(
-        defaultUri,
+        environment.apiUrl,
         JSON.stringify({
           query: `
           query {

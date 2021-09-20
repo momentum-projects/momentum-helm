@@ -7,6 +7,7 @@ import { githubToken } from './secrets';
 export const environment = {
   production: false,
   githubToken: githubToken,
+  apiUrl: 'http://localhost:4000/graphql',
 };
 
 /*

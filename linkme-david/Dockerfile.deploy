@@ -27,5 +27,4 @@ RUN prisma generate
 
 RUN npm install -g ts-node
 
-
-CMD DEBUG=express:* ts-node index.ts
+CMD prisma migrate deploy && DEBUG=express:* ts-node index.ts
