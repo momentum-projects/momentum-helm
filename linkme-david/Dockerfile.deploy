@@ -22,4 +22,10 @@ RUN npm install && mv node_modules /node_modules
 COPY backend/ .
 COPY --from=frontend /app/dist/ dist
 
-CMD ["./app"]
+RUN npm install -g prisma
+RUN prisma generate
+
+RUN npm install -g ts-node
+
+
+CMD DEBUG=express:* ts-node index.ts

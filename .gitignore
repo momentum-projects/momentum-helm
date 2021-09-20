@@ -6,3 +6,4 @@ node_modules
 
 # Ignoring eslint cache file
 resume-harry/.eslintcache
+.vscode
