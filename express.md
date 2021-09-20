@@ -55,3 +55,7 @@ app.get('*', function (request, response) {
 ## Setup (using TypeORM to generate our project)
 
 `typeorm init --name linkback-david --database postgres --express`
+
+## Debugging
+
+1. [Debugging](https://expressjs.com/en/guide/debugging.html)

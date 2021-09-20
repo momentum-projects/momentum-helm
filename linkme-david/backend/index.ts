@@ -7,6 +7,7 @@ import jsonwebtoken from "jsonwebtoken";
 import dotenv from "dotenv";
 import jwt from "express-jwt";
 import QueryString from "qs";
+import path from "path";
 
 const expressPlayground =
   require("graphql-playground-middleware-express").default;
@@ -170,6 +171,12 @@ app.get(
     endpoint: "/graphql/",
   })
 );
+
+const FRONTEND_PATH = __dirname + '/dist/'
+app.use(express.static(FRONTEND_PATH));
+app.get('*', function (_, response) {
+  response.sendFile(path.resolve(FRONTEND_PATH + 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(
