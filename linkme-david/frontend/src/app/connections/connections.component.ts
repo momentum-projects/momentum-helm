@@ -14,11 +14,9 @@ export class ConnectionsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.profilesService.load();
     this.loginService.loginEventEmitter.subscribe((value: boolean) => {
       // login service event
-      console.log({ loginServiceEvent: value });
-      // this.profilesService.load();
+      this.profilesService.load();
     });
   }
 

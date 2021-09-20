@@ -11,6 +11,10 @@ export class LoginService {
   _loggedIn = false;
   public loginEventEmitter = new EventEmitter<boolean>();
 
+  get loggedIn() {
+    return this._loggedIn;
+  }
+
   set loggedIn(value: boolean) {
     this._loggedIn = value;
     this.loginEventEmitter.emit(this._loggedIn);

@@ -155,10 +155,6 @@ const authenticationMiddleware = (
   }
 };
 
-let root = {
-
-}
-
 app.use(
   "/graphql",
   jwt({ secret: JWT_SECRET, algorithms: ["HS256"], credentialsRequired: false }),
