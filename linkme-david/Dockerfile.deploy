@@ -9,7 +9,7 @@ RUN npm install && mv node_modules /node_modules
 COPY frontend/ .
 RUN ln -sf /node_modules node_modules
 RUN npm install -g @angular/cli@v11-lts
-RUN ng build
+RUN ng build --configuration production 
 
 
 FROM node:14-alpine

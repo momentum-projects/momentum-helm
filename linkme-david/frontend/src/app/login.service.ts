@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { ProfilesService } from './profiles.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,7 @@ export class LoginService {
       this.getCurrentProfile()?.id;
   }
 
-  baseURL: string = 'http://localhost:4000/login/';
+  baseURL = environment.apiUrl;
 
   submitLoginCredentials(email: string, password: string): Observable<any> {
     return this.http.post(

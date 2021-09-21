@@ -1,0 +1,46 @@
+{
+    "family": "nodejs-fargate-task",
+    "networkMode": "awsvpc",
+    "executionRoleArn": "arn:aws:iam::850921955541:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "nodejs-app",
+            "image": "850921955541.dkr.ecr.us-east-1.amazonaws.com/momentumhelm:latest",
+            "portMappings": [
+                {
+                    "containerPort": 4000,
+                    "hostPort": 4000,
+                    "protocol": "tcp"
+                }
+            ],
+            "environment": [
+              {
+                "name": "JWT_SECRET",
+                "value": "YYJyIQcAW+iF7YIFnz3ZBIVVpuKqXn3Y5Fk2MLg78yk="
+              },
+              {
+                "name": "DATABASE_URL",
+                "value": "postgresql://postgres:F1jjiQj15s4ddFPepyqtMeKw0mGVuUXidJxH4lJo6Wk=@momentumhelm.cluster-c24hvodcbrj2.us-east-1.rds.amazonaws.com/app"
+              },
+              {
+                "name": "CORS_ALLOW",
+                "value": "http://momentum.pointd.io:4000"
+              }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "awslogs-momentum",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "awslogs-momentum"
+                }
+            },
+            "essential": true
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
+}
